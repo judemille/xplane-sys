@@ -21,4 +21,6 @@
 #include <XPLMPlugin.h>
 #include <XPLMProcessing.h>
 #include <XPLMScenery.h>
+#include <XPLMSound.h>
 #include <XPLMUtilities.h>
+#include <XPLMWeather.h>

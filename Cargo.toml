@@ -1,12 +1,24 @@
 [package]
-name = "xplm-sys"
-version = "0.4.0"
-authors = ["Sam Crow <samcrow@uw.edu>"]
+name = "xplane-sys"
+version = "4.0.1"
+authors = ["Julia DeMille <me@jdemille.com>"]
 description = "Low-level bindings for the X-Plane plugin SDK"
-repository = "https://github.com/samcrow/xplm-sys"
+repository = "https://github.com/judemille/xplane-sys"
 readme = "README.md"
 keywords = ["X-Plane", "plugin"]
 categories = ["external-ffi-bindings"]
 license = "MIT/Apache-2.0"
-
 build = "build.rs"
+edition = "2021"
+
+[build-dependencies]
+bindgen = "0.66.1"
+target-lexicon = "0.12.10"
+
+[features]
+XPLM400 = ["XPLM303"]
+XPLM303 = ["XPLM301"]
+XPLM301 = ["XPLM300"]
+XPLM300 = ["XPLM210"]
+XPLM210 = ["XPLM200"]
+XPLM200 = []
