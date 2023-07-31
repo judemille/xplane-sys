@@ -1,4 +1,4 @@
-![docs.rs](https://img.shields.io/docsrs/xplane-sys) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/judemille/xplane-sys/rust.yml)
+[![docs.rs](https://img.shields.io/docsrs/xplane-sys)](https://docs.rs/xplane-sys) [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/judemille/xplane-sys/rust.yml)](https://github.com/judemille/xplane-sys/actions)
 # xplane-sys: Rust bindings for the X-Plane plugin SDK #
 
 This library provides Rust bindings to the X-Plane plugin SDK.
