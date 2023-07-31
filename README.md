@@ -24,7 +24,7 @@ Some features from earlier SDK versions have been deprecated. This crate does no
 Realistically, if you are using gates below `XPLM303`, you are nuts. The feature gates are included, but X-Plane 11.50
 was released in 2020, so most users should have it, even if they are not on X-Plane 12.
 
-This crate will be updated as the X-Plane SDK updates, and will have an equal version number.
+This crate will be updated as the X-Plane SDK updates, and will have an equal version number. (except in extraneous circumstances)
 
 ## Documentation ##
 
