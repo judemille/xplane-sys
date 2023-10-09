@@ -40,7 +40,8 @@ extern "C" {
  * independently of the others.
  *
  */
-enum {
+
+typedef enum {
     /* Incoming speech on COM1                                                    */
     xplm_AudioRadioCom1                      = 0,
 
@@ -68,10 +69,7 @@ enum {
 
     /* Master bus. Not normally to be used directly.                              */
     xplm_Master                              = 10,
-
-
-};
-typedef int XPLMAudioBus;
+} XPLMAudioBus;
 
 /*
  * XPLMBankID
@@ -80,16 +78,14 @@ typedef int XPLMAudioBus;
  * "XPLM_MSG_FMOD_BANK_LOADED" and "XPLM_MSG_FMOD_BANK_UNLOADING" messages.
  *
  */
-enum {
+
+typedef enum {
     /* Master bank. Handles all aircraft and environmental audio.                 */
     xplm_MasterBank                          = 0,
 
     /* Radio bank. Handles COM1/COM2/GND/Pilot/Copilot.                           */
     xplm_RadioBank                           = 1,
-
-
-};
-typedef int XPLMBankID;
+} XPLMBankID;
 
 
 /* 

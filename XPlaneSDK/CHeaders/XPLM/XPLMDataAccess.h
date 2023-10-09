@@ -140,7 +140,8 @@ typedef void * XPLMDataRef;
  * get/set API.
  *
  */
-enum {
+
+typedef enum {
     /* Data of a type the current XPLM doesn't do.                                */
     xplmType_Unknown                         = 0,
 
@@ -163,8 +164,7 @@ enum {
     xplmType_Data                            = 32,
 
 
-};
-typedef int XPLMDataTypeID;
+} XPLMDataTypeID;
 
 #if defined(XPLM400)
 /*

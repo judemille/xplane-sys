@@ -65,14 +65,12 @@ extern "C" {
  * future APIs will expose more flexible or powerful or useful probes.
  *
  */
-enum {
+
+typedef enum {
     /* The Y probe gives you the location of the tallest physical scenery along   *
      * the Y axis going through the queried point.                                */
     xplm_ProbeY                              = 0,
-
-
-};
-typedef int XPLMProbeType;
+} XPLMProbeType;
 
 /*
  * XPLMProbeResult
@@ -80,7 +78,8 @@ typedef int XPLMProbeType;
  * Probe results - possible results from a probe query.
  *
  */
-enum {
+
+typedef enum {
     /* The probe hit terrain and returned valid values.                           */
     xplm_ProbeHitTerrain                     = 0,
 
@@ -91,10 +90,7 @@ enum {
     /* The probe call succeeded but there is no terrain under this point (perhaps *
      * it is off the side of the planet?)                                         */
     xplm_ProbeMissed                         = 2,
-
-
-};
-typedef int XPLMProbeResult;
+} XPLMProbeResult;
 
 /*
  * XPLMProbeRef

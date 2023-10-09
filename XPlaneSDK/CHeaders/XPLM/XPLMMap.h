@@ -109,16 +109,14 @@ typedef void * XPLMMapProjectionID;
  * (e.g., localizers are only visible in the IFR low-enroute style).
  *
  */
-enum {
+
+typedef enum {
     xplm_MapStyle_VFR_Sectional              = 0,
 
     xplm_MapStyle_IFR_LowEnroute             = 1,
 
     xplm_MapStyle_IFR_HighEnroute            = 2,
-
-
-};
-typedef int XPLMMapStyle;
+} XPLMMapStyle;
 
 /*
  * XPLMMapDrawingCallback_f
@@ -277,7 +275,8 @@ typedef void (* XPLMMapWillBeDeletedCallback_f)(
  * be drawn beneath markings layers.
  *
  */
-enum {
+
+typedef enum {
     /* A layer that draws "fill" graphics, like weather patterns, terrain, etc.   *
      * Fill layers frequently cover a large portion of the visible map area.      */
     xplm_MapLayer_Fill                       = 0,
@@ -286,10 +285,7 @@ enum {
      * airports, etc. Even dense markings layers cover a small portion of the     *
      * total map area.                                                            */
     xplm_MapLayer_Markings                   = 1,
-
-
-};
-typedef int XPLMMapLayerType;
+} XPLMMapLayerType;
 
 /* Globally unique identifier for X-Plane's Map window, used as the           *
  * mapToCreateLayerIn parameter in XPLMCreateMapLayer_t                       */
@@ -453,16 +449,14 @@ XPLM_API int        XPLMMapExists(
  * orientation.
  *
  */
-enum {
+
+typedef enum {
     /* Orient such that a 0 degree rotation matches the map's north               */
     xplm_MapOrientation_Map                  = 0,
 
     /* Orient such that a 0 degree rotation is "up" relative to the user interface*/
     xplm_MapOrientation_UI                   = 1,
-
-
-};
-typedef int XPLMMapOrientation;
+} XPLMMapOrientation;
 
 /*
  * XPLMDrawMapIconFromSheet

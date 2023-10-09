@@ -1,6 +1,6 @@
 [package]
 name = "xplane-sys"
-version = "4.0.101"
+version = "4.0.102"
 authors = ["Julia DeMille <me@jdemille.com>"]
 description = "Low-level bindings for the X-Plane plugin SDK"
 repository = "https://github.com/judemille/xplane-sys"
@@ -12,7 +12,7 @@ build = "build.rs"
 edition = "2021"
 
 [build-dependencies]
-bindgen = "0.66.1"
+bindgen = "0.68.1"
 target-lexicon = "0.12.10"
 
 [features]
@@ -25,4 +25,4 @@ XPLM200 = []
 
 [package.metadata.docs.rs]
 features = ["XPLM400"]
-targets = ["x86_64-unknown-linux-gnu", "x86_64-apple-darwin", "x86_64-pc-windows-msvc"]
+targets = ["x86_64-unknown-linux-gnu", "x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-pc-windows-msvc"]

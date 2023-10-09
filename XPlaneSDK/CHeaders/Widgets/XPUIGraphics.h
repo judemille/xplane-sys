@@ -42,7 +42,8 @@ extern "C" {
  * element. All other elements can be rescaled.
  *
  */
-enum {
+
+typedef enum {
     /* An LCD screen that shows help.                                             */
     xpWindow_Help                            = 0,
 
@@ -59,8 +60,7 @@ enum {
     xpWindow_ListView                        = 5,
 
 
-};
-typedef int XPWindowStyle;
+} XPWindowStyle;
 
 /*
  * XPDrawWindow
@@ -104,7 +104,8 @@ WIDGET_API void       XPGetWindowDefaultDimensions(
  * Scalable Axis Required Background
  *
  */
-enum {
+
+typedef enum {
     /* x      metal                                                               */
     xpElement_TextField                      = 6,
 
@@ -212,10 +213,7 @@ enum {
 
     /* none     metal                                                             */
     xpElement_WindowDragBarSmooth            = 62,
-
-
-};
-typedef int XPElementStyle;
+} XPElementStyle;
 
 /*
  * XPDrawElement
@@ -265,7 +263,8 @@ WIDGET_API void       XPGetElementDefaultDimensions(
  * - Progress: this is a progress indicator showing how a long task is going.
  *
  */
-enum {
+
+typedef enum {
     /*  not over metal can be lit  can be rotated                                 */
     xpTrack_ScrollBar                        = 0,
 
@@ -274,10 +273,7 @@ enum {
 
     /*  over metal  cannot be lit cannot be rotated                               */
     xpTrack_Progress                         = 2,
-
-
-};
-typedef int XPTrackStyle;
+} XPTrackStyle;
 
 /*
  * XPDrawTrack

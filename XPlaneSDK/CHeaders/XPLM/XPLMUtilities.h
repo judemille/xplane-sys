@@ -71,17 +71,15 @@ extern "C" {
  * SDK.
  *
  */
-enum {
+
+typedef enum {
     /* A situation (.sit) file, which starts off a flight in a given              *
      * configuration.                                                             */
     xplm_DataFile_Situation                  = 1,
 
     /* A situation movie (.smo) file, which replays a past flight.                */
     xplm_DataFile_ReplayMovie                = 2,
-
-
-};
-typedef int XPLMDataFileType;
+} XPLMDataFileType;
 #endif /* XPLM200 */
 
 /*
@@ -229,7 +227,7 @@ XPLM_API int        XPLMSaveDataFile(
  * deprecated. Your plugin should never need this enumeration.
  *
  */
-enum {
+typedef enum {
     xplm_Host_Unknown                        = 0,
 
     xplm_Host_XPlane                         = 1,
@@ -275,8 +273,7 @@ enum {
 
 #endif /* XPLM_DEPRECATED */
 
-};
-typedef int XPLMHostApplicationID;
+} XPLMHostApplicationID;
 
 /*
  * XPLMLanguageCode
@@ -287,7 +284,8 @@ typedef int XPLMHostApplicationID;
  * localized to a certain language.
  *
  */
-enum {
+
+typedef enum {
     xplm_Language_Unknown                    = 0,
 
     xplm_Language_English                    = 1,
@@ -319,8 +317,7 @@ enum {
 
 #endif /* XPLM300 */
 
-};
-typedef int XPLMLanguageCode;
+} XPLMLanguageCode;
 
 #if defined(XPLM200)
 /*
@@ -550,7 +547,8 @@ XPLM_API void       XPLMReloadScenery(void);
  * The phases of a command.
  *
  */
-enum {
+
+typedef enum {
     /* The command is being started.                                              */
     xplm_CommandBegin                        = 0,
 
@@ -559,10 +557,7 @@ enum {
 
     /* The command has ended.                                                     */
     xplm_CommandEnd                          = 2,
-
-
-};
-typedef int XPLMCommandPhase;
+} XPLMCommandPhase;
 
 /*
  * XPLMCommandRef

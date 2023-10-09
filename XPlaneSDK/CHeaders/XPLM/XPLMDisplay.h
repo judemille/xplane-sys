@@ -140,7 +140,8 @@ extern "C" {
  *   as X-Plane evolves.
  *
  */
-enum {
+
+typedef enum {
 #if defined(XPLM_DEPRECATED)
     /* Deprecated as of XPLM302. This is the earliest point at which you can draw *
      * in 3-d.                                                                    */
@@ -215,8 +216,7 @@ enum {
 
 #endif /* XPLM200 */
 
-};
-typedef int XPLMDrawingPhase;
+} XPLMDrawingPhase;
 
 /*
  * XPLMDrawCallback_f
@@ -302,7 +302,8 @@ XPLM_API int        XPLMUnregisterDrawCallback(
  * get a callback before or after each item.
  *
  */
-enum {
+
+typedef enum {
     /* GNS430, pilot side.                                                        */
     xplm_device_GNS430_1                     = 0,
 
@@ -358,8 +359,7 @@ enum {
     xplm_device_Primus_RMU_2                 = 17,
 
 
-};
-typedef int XPLMDeviceID;
+} XPLMDeviceID;
 
 /*
  * XPLMAvionicsCallback_f
@@ -553,16 +553,14 @@ typedef void (* XPLMHandleKey_f)(
  * first receiving the corresponding mouse-down.
  *
  */
-enum {
+
+typedef enum {
     xplm_MouseDown                           = 1,
 
     xplm_MouseDrag                           = 2,
 
     xplm_MouseUp                             = 3,
-
-
-};
-typedef int XPLMMouseStatus;
+} XPLMMouseStatus;
 
 /*
  * XPLMHandleMouseClick_f
@@ -604,7 +602,8 @@ typedef int (* XPLMHandleMouseClick_f)(
  * See XPLMHandleCursor_f for more info.
  *
  */
-enum {
+
+typedef enum {
     /* X-Plane manages the cursor normally, plugin does not affect the cusrsor.   */
     xplm_CursorDefault                       = 0,
 
@@ -616,10 +615,7 @@ enum {
 
     /* X-Plane shows the cursor but lets you select an OS cursor.                 */
     xplm_CursorCustom                        = 3,
-
-
-};
-typedef int XPLMCursorStatus;
+} XPLMCursorStatus;
 #endif /* XPLM200 */
 
 #if defined(XPLM200)
@@ -709,7 +705,8 @@ typedef int (* XPLMHandleMouseWheel_f)(
  * flight overlay window layer.)
  *
  */
-enum {
+
+typedef enum {
     /* The lowest layer, used for HUD-like displays while flying.                 */
     xplm_WindowLayerFlightOverlay            = 0,
 
@@ -724,10 +721,7 @@ enum {
     /* "Growl"-style notifications that are visible in a corner of the screen,    *
      * even over modals                                                           */
     xplm_WindowLayerGrowlNotifications       = 3,
-
-
-};
-typedef int XPLMWindowLayer;
+} XPLMWindowLayer;
 #endif /* XPLM300 */
 
 #if defined(XPLM301)
@@ -742,7 +736,8 @@ typedef int XPLMWindowLayer;
  * (in the XPLMCreateWindow_t you pass to XPLMCreateWindowEx()).
  *
  */
-enum {
+
+typedef enum {
     /* X-Plane will draw no decoration for your window, and apply no automatic    *
      * click handlers. The window will not stop click from passing through its    *
      * bounds. This is suitable for "windows" which request, say, the full screen *
@@ -762,10 +757,7 @@ enum {
      * your window, but it will stop clicks from passing through your windows     *
      * bounds, and provide automatic mouse handlers for resizing.                 */
     xplm_WindowDecorationSelfDecoratedResizable = 3,
-
-
-};
-typedef int XPLMWindowDecoration;
+} XPLMWindowDecoration;
 #endif /* XPLM301 */
 
 #if defined(XPLM200)
@@ -1330,7 +1322,8 @@ XPLM_API void       XPLMSetWindowResizingLimits(
  * "free" positioning mode.
  *
  */
-enum {
+
+typedef enum {
     /* The default positioning mode. Set the window geometry and its future       *
      * position will be determined by its window gravity, resizing limits, and    *
      * user interactions.                                                         */
@@ -1357,8 +1350,7 @@ enum {
 
 #endif /* XPLM301 */
 
-};
-typedef int XPLMWindowPositioningMode;
+} XPLMWindowPositioningMode;
 #endif /* XPLM300 */
 
 #if defined(XPLM300)

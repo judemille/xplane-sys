@@ -68,7 +68,7 @@ extern "C" {
  *  via the Widgets library.
  *
  */
-enum {
+typedef enum {
     /* The bitmap that contains window outlines, button outlines, fonts, etc.     */
     xplm_Tex_GeneralInterface                = 0,
 
@@ -83,8 +83,7 @@ enum {
 
 #endif /* XPLM_DEPRECATED */
 
-};
-typedef int XPLMTextureID;
+} XPLMTextureID;
 
 /*
  * XPLMSetGraphicsState
@@ -260,7 +259,8 @@ XPLM_API void       XPLMDrawTranslucentDarkBox(
  * you want to.
  *
  */
-enum {
+
+typedef enum {
     /* Mono-spaced font for user interface.  Available in all versions of the SDK.*/
     xplmFont_Basic                           = 0,
 
@@ -355,8 +355,7 @@ enum {
 
 #endif /* XPLM200 */
 
-};
-typedef int XPLMFontID;
+} XPLMFontID;
 
 /*
  * XPLMDrawString

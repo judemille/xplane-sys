@@ -62,7 +62,8 @@ extern "C" {
  * You can retain it indefinitely or until the user selects a new view.
  *
  */
-enum {
+
+typedef enum {
     /* Control the camera until the user picks a new view.                        */
     xplm_ControlCameraUntilViewChanges       = 1,
 
@@ -71,8 +72,7 @@ enum {
     xplm_ControlCameraForever                = 2,
 
 
-};
-typedef int XPLMCameraControlDuration;
+} XPLMCameraControlDuration;
 
 /*
  * XPLMCameraPosition_t

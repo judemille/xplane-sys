@@ -174,7 +174,8 @@ typedef int XPLMPluginID;
  * #ifdefed code.
  *
  */
-enum {
+
+typedef enum {
     /* The shift key is down                                                      */
     xplm_ShiftFlag                           = 1,
 
@@ -191,8 +192,7 @@ enum {
     xplm_UpFlag                              = 16,
 
 
-};
-typedef int XPLMKeyFlags;
+} XPLMKeyFlags;
 
 /***************************************************************************
  * ASCII CONTROL KEY CODES

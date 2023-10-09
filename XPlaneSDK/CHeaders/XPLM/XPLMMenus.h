@@ -59,7 +59,8 @@ extern "C" {
  * lit.  So there are three possible states.
  *
  */
-enum {
+
+typedef enum {
     /* There is no symbol to the left of the menu item.                           */
     xplm_Menu_NoCheck                        = 0,
 
@@ -68,10 +69,7 @@ enum {
 
     /* The menu has a mark next to it that is checked (lit).                      */
     xplm_Menu_Checked                        = 2,
-
-
-};
-typedef int XPLMMenuCheck;
+} XPLMMenuCheck;
 
 /*
  * XPLMMenuID

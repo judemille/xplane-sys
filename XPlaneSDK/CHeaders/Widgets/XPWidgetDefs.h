@@ -87,7 +87,8 @@ typedef void * XPWidgetID;
  * your own property IDs as well.
  *
  */
-enum {
+
+typedef enum {
     /* A window's refcon is an opaque value used by client code to find other data*
      * based on it.                                                               */
     xpProperty_Refcon                        = 0,
@@ -120,10 +121,7 @@ enum {
      * Properties 1000 - 1099 are for widget class 0, 1100 - 1199 for widget class*
      * 1, etc.                                                                    */
     xpProperty_UserStart                     = 10000,
-
-
-};
-typedef int XPWidgetPropertyID;
+} XPWidgetPropertyID;
 
 /*
  * XPMouseState_t
@@ -182,7 +180,8 @@ typedef struct {
  * Currently there are three modes:
  *
  */
-enum {
+
+typedef enum {
     /* The message will only be sent to the target widget.                        */
     xpMode_Direct                            = 0,
 
@@ -202,10 +201,7 @@ enum {
      * accepted. (This is really only useful for some internal widget library     *
      * functions.)                                                                */
     xpMode_Once                              = 4,
-
-
-};
-typedef int XPDispatchMode;
+} XPDispatchMode;
 
 /*
  * XPWidgetClass
@@ -232,7 +228,8 @@ typedef int XPWidgetClass;
  * notifications of events. The list of messages may be expanded.
  *
  */
-enum {
+
+typedef enum {
     /* No message, should not be sent.                                            */
     xpMsg_None                               = 0,
 
@@ -439,10 +436,7 @@ enum {
      * provided with the library with 1000 - 1099 for widget class 0, 1100 - 1199 *
      * for widget class 1, etc. Message IDs 10,000 and beyond are for plugin use. */
     xpMsg_UserStart                          = 10000,
-
-
-};
-typedef int XPWidgetMessage;
+} XPWidgetMessage;
 
 /***************************************************************************
  * WIDGET CALLBACK FUNCTION

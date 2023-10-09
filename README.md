@@ -1,9 +1,9 @@
 [![docs.rs](https://img.shields.io/docsrs/xplane-sys)](https://docs.rs/xplane-sys) [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/judemille/xplane-sys/rust.yml)](https://github.com/judemille/xplane-sys/actions)
-# xplane-sys: Rust bindings for the X-Plane plugin SDK #
+# xplane-sys: Rust bindings for the X-Plane plugin SDK
 
 This library provides Rust bindings to the X-Plane plugin SDK.
 
-## SDK versions ##
+## SDK versions
 
 This crate is based on SDK version 4.0.1 (XPLM400), supporting X-Plane 12.04 and newer. Plugins made with this crate
 can be used with earlier versions of X-Plane, so long as the right feature gates are set. The gates are as follows:
@@ -26,15 +26,16 @@ was released in 2020, so most users should have it, even if they are not on X-Pl
 
 This crate will be updated as the X-Plane SDK updates, and will have an equal version number. (except in extraneous circumstances)
 
-## Documentation ##
+## Documentation
 
 The types and functions are documented on [the X-Plane plugin API website](http://developer.x-plane.com/sdk/).
 
-## Compiling and linking ##
+## Compiling and linking
 
 This crate currently can be compiled on macOS, Linux, and Windows. This is because X-Plane only (at the time of writing)
 supports these platforms. This crate also only supports x86_64 and aarch64. These are the architectures supported by the
-current version of X-Plane, and if you want to compile for ppc or iX86, you're on your own.
+current version of X-Plane, and if you want to compile for ppc or iX86, you're on your own. Additionally, compilation on Windows
+requires the msvc ABI, and compilation on Linux requires the gnu ABI. This is to ensure compatibility with X-Plane itself.
 
 On macOS and Windows, plugins must be dynamically linked with libraries that
 provide stub implementations of the SDK functions. This crate includes those

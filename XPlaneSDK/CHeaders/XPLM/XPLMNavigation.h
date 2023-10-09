@@ -45,7 +45,8 @@ extern "C" {
  * XPLMSetFMSEntryLatLon to set a lat/lon waypoint.
  *
  */
-enum {
+
+typedef enum {
     xplm_Nav_Unknown                         = 0,
 
     xplm_Nav_Airport                         = 1,
@@ -71,10 +72,7 @@ enum {
     xplm_Nav_DME                             = 1024,
 
     xplm_Nav_LatLon                          = 2048,
-
-
-};
-typedef int XPLMNavType;
+} XPLMNavType;
 
 /*
  * XPLMNavRef

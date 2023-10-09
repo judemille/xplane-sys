@@ -53,7 +53,7 @@ extern "C" {
  * These type values are used to control the appearance of a main window.
  *
  */
-enum {
+typedef enum {
     /* The standard main window; pin stripes on XP7, metal frame on XP 6.         */
     xpMainWindowStyle_MainWindow             = 0,
 
@@ -61,13 +61,13 @@ enum {
     xpMainWindowStyle_Translucent            = 1,
 
 
-};
+} XPMainWindowType;
 
 /*
  * Main Window Properties
  *
  */
-enum {
+typedef enum {
     /* This property specifies the type of window.  Set to one of the main window *
      * types above.                                                               */
     xpProperty_MainWindowType                = 1100,
@@ -77,18 +77,18 @@ enum {
     xpProperty_MainWindowHasCloseBoxes       = 1200,
 
 
-};
+} XPMainWindowProperty;
 
 /*
  * MainWindow Messages
  *
  */
-enum {
+typedef enum {
     /* This message is sent when the close buttons for your window are pressed.   */
     xpMessage_CloseButtonPushed              = 1200,
 
 
-};
+} XPMainWindowMessage;
 
 /***************************************************************************
  * SUB WINDOW
@@ -109,7 +109,7 @@ enum {
  * These values control the appearance of the subwindow.
  *
  */
-enum {
+typedef enum {
     /* A panel that sits inside a main window.                                    */
     xpSubWindowStyle_SubWindow               = 0,
 
@@ -120,19 +120,19 @@ enum {
     xpSubWindowStyle_ListView                = 3,
 
 
-};
+} XPSubWindowType;
 
 /*
  * SubWindow Properties
  *
  */
-enum {
+typedef enum {
     /* This property specifies the type of window.  Set to one of the subwindow   *
      * types above.                                                               */
     xpProperty_SubWindowType                 = 1200,
 
 
-};
+} XPSubWindowProperty;
 
 /***************************************************************************
  * BUTTON
@@ -167,7 +167,7 @@ enum {
  * the mouse.
  *
  */
-enum {
+typedef enum {
     /* This is a standard push button, like an 'OK' or 'Cancel' button in a dialog*
      * box.                                                                       */
     xpPushButton                             = 0,
@@ -186,7 +186,7 @@ enum {
     xpLittleUpArrow                          = 6,
 
 
-};
+} XPButtonType;
 
 /*
  * Button Behavior Values
@@ -194,7 +194,7 @@ enum {
  * These define how the button responds to mouse clicks.
  *
  */
-enum {
+typedef enum {
     /* Standard push button behavior. The button highlights while the mouse is    *
      * clicked over it and unhighlights when the mouse is moved outside of it or  *
      * released. If the mouse is released over the button, the                    *
@@ -211,13 +211,13 @@ enum {
     xpButtonBehaviorRadioButton              = 2,
 
 
-};
+} XPButtonBehavior;
 
 /*
  * Button Properties
  *
  */
-enum {
+typedef enum {
     /* This property sets the visual type of button.  Use one of the button types *
      * above.                                                                     */
     xpProperty_ButtonType                    = 1300,
@@ -231,7 +231,7 @@ enum {
     xpProperty_ButtonState                   = 1302,
 
 
-};
+} XPButtonProperty;
 
 /*
  * Button Messages
@@ -242,7 +242,7 @@ enum {
  * widget.)
  *
  */
-enum {
+typedef enum {
     /* This message is sent when the user completes a click and release in a      *
      * button with push button behavior. Parameter one of the message is the      *
      * widget ID of the button. This message is dispatched up the widget          *
@@ -257,7 +257,7 @@ enum {
     xpMsg_ButtonStateChanged                 = 1301,
 
 
-};
+} XPButtonMessage;
 
 /***************************************************************************
  * TEXT FIELD
@@ -290,7 +290,7 @@ enum {
  * These control the look of the text field.
  *
  */
-enum {
+typedef enum {
     /* A field for text entry.                                                    */
     xpTextEntryField                         = 0,
 
@@ -303,13 +303,13 @@ enum {
     xpTextTranslucent                        = 4,
 
 
-};
+} XPTextFieldType;
 
 /*
  * Text Field Properties
  *
  */
-enum {
+typedef enum {
     /* This is the character position the selection starts at, zero based. If it  *
      * is the same as the end insertion point, the insertion point is not a       *
      * selection.                                                                 */
@@ -344,19 +344,19 @@ enum {
     xpProperty_ActiveEditSide                = 1408,
 
 
-};
+} XPTextFieldProperty;
 
 /*
  * Text Field Messages
  *
  */
-enum {
+typedef enum {
     /* The text field sends this message to itself when its text changes. It sends*
      * the message up the call chain; param1 is the text field's widget ID.       */
     xpMsg_TextFieldChanged                   = 1400,
 
 
-};
+} XPTextFieldMessage;
 
 /***************************************************************************
  * SCROLL BAR
@@ -377,7 +377,7 @@ enum {
  * This defines how the scroll bar looks.
  *
  */
-enum {
+typedef enum {
     /* A standard X-Plane scroll bar (with arrows on the ends).                   */
     xpScrollBarTypeScrollBar                 = 0,
 
@@ -385,13 +385,13 @@ enum {
     xpScrollBarTypeSlider                    = 1,
 
 
-};
+} XPScrollBarType;
 
 /*
  * Scroll Bar Properties
  *
  */
-enum {
+typedef enum {
     /* The current position of the thumb (in between the min and max, inclusive)  */
     xpProperty_ScrollBarSliderPosition       = 1500,
 
@@ -412,19 +412,19 @@ enum {
     xpProperty_ScrollBarSlop                 = 1505,
 
 
-};
+} XPScrollBarProperty;
 
 /*
  * Scroll Bar Messages
  *
  */
-enum {
+typedef enum {
     /* The scroll bar sends this message when the slider position changes. It     *
      * sends the message up the call chain; param1 is the scroll bar widget ID.   */
     xpMsg_ScrollBarSliderPositionChanged     = 1500,
 
 
-};
+} XPScrollBarMessage;
 
 /***************************************************************************
  * CAPTION
@@ -443,13 +443,13 @@ enum {
  * Caption Properties
  *
  */
-enum {
+typedef enum {
     /* This property specifies whether the caption is lit; use lit captions       *
      * against screens.                                                           */
     xpProperty_CaptionLit                    = 1600,
 
 
-};
+} XPCaptionProperty;
 
 /***************************************************************************
  * GENERAL GRAPHICS
@@ -469,7 +469,7 @@ enum {
  * These define the icon for the general graphics.
  *
  */
-enum {
+typedef enum {
     xpShip                                   = 4,
 
     xpILSGlideScope                          = 5,
@@ -509,18 +509,18 @@ enum {
     xpWayPoint                               = 23,
 
 
-};
+} XPGeneralGraphicsType;
 
 /*
  * General Graphics Properties
  *
  */
-enum {
+typedef enum {
     /* This property controls the type of icon that is drawn.                     */
     xpProperty_GeneralGraphicsType           = 1700,
 
 
-};
+} XPGeneralGraphicsProperty;
 
 /***************************************************************************
  * PROGRESS INDICATOR
@@ -536,7 +536,7 @@ enum {
  * Progress Indicator Properties
  *
  */
-enum {
+typedef enum {
     /* This is the current value of the progress indicator.                       */
     xpProperty_ProgressPosition              = 1800,
 
@@ -547,7 +547,7 @@ enum {
     xpProperty_ProgressMax                   = 1802,
 
 
-};
+} XPProgressIndicatorProperty;
 
 #ifdef __cplusplus
 }
