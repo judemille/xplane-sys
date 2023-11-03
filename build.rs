@@ -1,4 +1,4 @@
-use bindgen::callbacks::ParseCallbacks;
+use bindgen::callbacks::{ParseCallbacks, IntKind};
 use bindgen::EnumVariation;
 use std::path::{Path, PathBuf};
 use std::{env, str::FromStr};
@@ -8,11 +8,8 @@ fn get_clang_args(crate_path: &Path) -> Vec<String> {
     let mut r = Vec::new();
     r.push("-DLIN".to_string()); // Technically tells the headers they're being compiled for Linux.
                                  // Doesn't matter for our use case -- the only things that are changed are irrelevant to bindgen.
-    if cfg!(not(any(feature = "XPLM200", feature = "OLD"))) {
+    if cfg!(not(feature = "XPLM200")) {
         panic!("Please set a desired SDK version!");
-    }
-    if cfg!(all(feature = "XPLM200", feature = "OLD")) {
-        panic!("Using both normal version features and the OLD feature is paradoxical. Pick one.");
     }
     if cfg!(feature = "XPLM400") {
         r.push("-DXPLM400".to_string());
@@ -92,8 +89,15 @@ fn handle_platform(crate_path: PathBuf) {
 }
 
 #[derive(Debug)]
-struct EnumHandler;
-impl ParseCallbacks for EnumHandler {
+struct NamingHandler;
+impl ParseCallbacks for NamingHandler {
+    fn int_macro(&self, name: &str, _value: i64) -> Option<IntKind> {
+        if name.starts_with("XPLM_VK") || name.starts_with("XPLM_KEY") {
+            Some(IntKind::U32)
+        } else {
+            None
+        }
+    }
     fn enum_variant_name(
         &self,
         enum_name: Option<&str>,
@@ -120,6 +124,7 @@ impl ParseCallbacks for EnumHandler {
                         '3' => "Center",
                         _ => unreachable!(),
                     };
+                    out = out.trim_start_matches("device_");
                     return Some(out[0..out.len() - 1].to_string() + side);
                 } else {
                     out
@@ -164,7 +169,7 @@ impl ParseCallbacks for EnumHandler {
                         out = out.trim_start_matches("Text");
                     } else if enum_name == "XPButtonBehavior" {
                         out = out.trim_start_matches("ButtonBehavior");
-                    } 
+                    }
                     out.trim_start_matches('_')
                 } else {
                     out
@@ -181,13 +186,18 @@ fn main() {
     let crate_path = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
     let bindings = bindgen::Builder::default()
         .header("src/combined.h")
-        .default_enum_style(EnumVariation::Rust {
-            non_exhaustive: true,
+        .default_enum_style(EnumVariation::NewType {
+            is_bitfield: false,
+            is_global: false,
         })
         .bitfield_enum("XPLMDataTypeID")
+        .bitfield_enum("XPLMKeyFlags")
+        .bitfield_enum("XPLMNavType")
         .use_core()
-        .parse_callbacks(Box::new(EnumHandler))
+        .prepend_enum_name(false)
+        .parse_callbacks(Box::new(NamingHandler))
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+        .default_macro_constant_type(bindgen::MacroTypeVariation::Signed)
         .clang_args(get_clang_args(&crate_path))
         .generate()
         .expect("Unable to generate bindings!");
@@ -198,27 +208,4 @@ fn main() {
         .expect("Couldn't write bindings!");
 
     handle_platform(crate_path);
-    /*     if target.contains("-apple-") {
-        let library_path = crate_path.join("SDK/Libraries/Mac");
-        println!(
-            "cargo:rustc-link-search=framework={}",
-            library_path.to_str().unwrap()
-        );
-        println!("cargo:rustc-link-lib=framework=XPLM");
-        println!("cargo:rustc-link-lib=framework=XPWidgets");
-    } else if target.contains("-linux-") {
-        // Do nothing for Linux
-    } else if target.contains("-windows-") {
-        let library_path = crate_path.join("SDK/Libraries/Win");
-        println!("cargo:rustc-link-search={}", library_path.to_str().unwrap());
-        if target.contains("x86_64") {
-            println!("cargo:rustc-link-lib=XPLM_64");
-            println!("cargo:rustc-link-lib=XPWidgets_64");
-        } else {
-            println!("cargo:rustc-link-lib=XPLM");
-            println!("cargo:rustc-link-lib=XPWidgets");
-        }
-    } else {
-        panic!("Target operating system not Mac OS, Linux, or Windows. As of the writing of this version of this crate, X-Plane does not support any other platform.")
-    } */
 }
