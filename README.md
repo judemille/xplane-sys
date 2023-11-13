@@ -41,6 +41,23 @@ On macOS and Windows, plugins must be dynamically linked with libraries that
 provide stub implementations of the SDK functions. This crate includes those
 libraries and tells Cargo to link them.
 
+## Disclaimer
+The current maintainer of this project is a trans lesbian who unequivocally supports Ukraine,
+and opposes any and all human rights violations.
+
+### *You should not use this project if you:*
+ * Do not unequivocally support the LGBTQ+ population, including transgender individuals.
+ * Think that LGBTQ+ people "shouldn't put it out on display"
+ * Support "drop the T", TERF, or similar movements.
+ * Think that pedophilia is included in LGBTQ+, either because you want it to be included, or you think
+   that the community accepts it. It does not accept it.
+ * Refuse to address and refer to people with their preferred name, pronouns, and gender labels.
+ * Do not support Ukraine's struggle against their Russian oppressors.
+ * Support any far-right parties or politicians (including Vladimir Putin, the GOP, AfD, FdI, and similar)
+
+I cannot stop you, but anyone observed to meet the above listed criteria interacts with the project
+will be blocked from posting issues or pull requests.
+
 ## License
 
 Licensed under either of
