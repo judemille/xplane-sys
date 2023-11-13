@@ -58,3 +58,8 @@ Files in the SDK folder are provided under a separate license, provided in
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you shall be dual licensed as above, without any
 additional terms or conditions.
+
+## Unit Testing
+
+The `mockall` feature of this crate is intended to be enabled when unit testing a crate that uses this crate.
+All functions will be mocked, using [mockall.](https://github.com/asomers/mockall)

@@ -16,11 +16,13 @@ macro_rules! bitfield_impls {
     ($t:ty) => {
         impl $t {
             #[inline]
+            #[must_use]
             pub fn field_true(self, field: Self) -> bool {
                 self & field == field
             }
 
             #[inline]
+            #[must_use]
             pub fn field_false(self, field: Self) -> bool {
                 !self.field_true(field)
             }

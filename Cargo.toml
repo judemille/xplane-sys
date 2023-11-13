@@ -11,11 +11,15 @@ license = "MIT/Apache-2.0"
 build = "build.rs"
 edition = "2021"
 
+[dependencies]
+mockall = { version = "0.11", optional = true }
+
 [build-dependencies]
-bindgen = "0.68.1"
+bindgen = "0.69"
 target-lexicon = "0.12.10"
 
 [features]
+default = []
 XPLM400 = ["XPLM303"]
 XPLM303 = ["XPLM301"]
 XPLM301 = ["XPLM300"]
@@ -25,4 +29,9 @@ XPLM200 = []
 
 [package.metadata.docs.rs]
 features = ["XPLM400"]
-targets = ["x86_64-unknown-linux-gnu", "x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-pc-windows-msvc"]
+targets = [
+    "x86_64-unknown-linux-gnu",
+    "x86_64-apple-darwin",
+    "aarch64-apple-darwin",
+    "x86_64-pc-windows-msvc",
+]

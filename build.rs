@@ -1,5 +1,6 @@
-use bindgen::callbacks::{ParseCallbacks, IntKind};
+use bindgen::callbacks::{IntKind, ParseCallbacks};
 use bindgen::EnumVariation;
+use std::fs;
 use std::path::{Path, PathBuf};
 use std::{env, str::FromStr};
 use target_lexicon::{Architecture, Environment, OperatingSystem, Triple};
@@ -8,9 +9,10 @@ fn get_clang_args(crate_path: &Path) -> Vec<String> {
     let mut r = Vec::new();
     r.push("-DLIN".to_string()); // Technically tells the headers they're being compiled for Linux.
                                  // Doesn't matter for our use case -- the only things that are changed are irrelevant to bindgen.
-    if cfg!(not(feature = "XPLM200")) {
-        panic!("Please set a desired SDK version!");
-    }
+    assert!(
+        cfg!(feature = "XPLM200"),
+        "Please set a desired SDK version!"
+    );
     if cfg!(feature = "XPLM400") {
         r.push("-DXPLM400".to_string());
     }
@@ -39,21 +41,19 @@ fn get_clang_args(crate_path: &Path) -> Vec<String> {
     r
 }
 
-fn handle_platform(crate_path: PathBuf) {
+fn handle_platform(crate_path: &Path) {
     let target = env::var("TARGET").unwrap();
     let triple = Triple::from_str(&target).unwrap();
     match triple.operating_system {
         OperatingSystem::Windows => {
-            if triple.architecture != Architecture::X86_64 {
-                panic!(
-                    "Unsupported target architecture! xplane-sys on Windows only supports x86_64."
-                );
-            }
-            if triple.environment != Environment::Msvc {
-                panic!(
-                    "Unsupported environment! X-Plane uses the MSVC ABI. Compile for that target."
-                );
-            }
+            assert!(
+                triple.architecture == Architecture::X86_64,
+                "Unsupported target architecture! xplane-sys on Windows only supports x86_64."
+            );
+            assert!(
+                triple.environment == Environment::Msvc,
+                "Unsupported environment! X-Plane uses the MSVC ABI. Compile for that target."
+            );
             let library_path = crate_path.join("SDK/Libraries/Win");
             println!("cargo:rustc-link-search={}", library_path.to_str().unwrap());
             println!("cargo:rustc-link-lib=XPLM_64");
@@ -73,14 +73,11 @@ fn handle_platform(crate_path: PathBuf) {
             println!("cargo:rustc-link-lib=framework=XPWidgets");
         }
         OperatingSystem::Linux => {
-            if triple.architecture != Architecture::X86_64 {
-                panic!(
-                    "Unsupported target architecture! xplane-sys on Linux only supports x86_64."
-                );
-            }
-            if triple.environment != Environment::Gnu {
-                panic!("Unsupported environment! X-Plane runs on the GNU ABI on Linux, and so xplane-sys requires a GNU target.");
-            }
+            assert!(
+                triple.architecture == Architecture::X86_64,
+                "Unsupported target architecture! xplane-sys on Linux only supports x86_64."
+            );
+            assert!(triple.environment == Environment::Gnu, "Unsupported environment! X-Plane runs on the GNU ABI on Linux, and so xplane-sys requires a GNU target.");
         } // No need to link libraries on Linux.
         _ => panic!(
             "Unsupported operating system! The X-Plane SDK only supports Windows, Mac, and Linux."
@@ -184,8 +181,15 @@ impl ParseCallbacks for NamingHandler {
 fn main() {
     // Get the absolute path to this crate, so that linking will work when done in another folder
     let crate_path = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
-    let bindings = bindgen::Builder::default()
+    let bindings_builder = bindgen::Builder::default()
         .header("src/combined.h")
+        .use_core()
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
+        .clang_args(get_clang_args(&crate_path));
+
+    let bindings_except_fns = bindings_builder
+        .clone()
+        .prepend_enum_name(false)
         .default_enum_style(EnumVariation::NewType {
             is_bitfield: false,
             is_global: false,
@@ -193,19 +197,44 @@ fn main() {
         .bitfield_enum("XPLMDataTypeID")
         .bitfield_enum("XPLMKeyFlags")
         .bitfield_enum("XPLMNavType")
-        .use_core()
-        .prepend_enum_name(false)
         .parse_callbacks(Box::new(NamingHandler))
-        .parse_callbacks(Box::new(bindgen::CargoCallbacks))
         .default_macro_constant_type(bindgen::MacroTypeVariation::Signed)
-        .clang_args(get_clang_args(&crate_path))
+        .ignore_functions()
         .generate()
-        .expect("Unable to generate bindings!");
+        .expect("Unable to generate bindings!")
+        .to_string();
 
-    let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
-    bindings
-        .write_to_file(out_path.join("bindings.rs"))
-        .expect("Couldn't write bindings!");
+    let bindings_fns_only = bindings_builder
+        .with_codegen_config(bindgen::CodegenConfig::FUNCTIONS)
+        .generate()
+        .expect("Unable to generate bindings!")
+        .to_string();
 
-    handle_platform(crate_path);
+    let bindings = &[
+        r#"
+        #[cfg(feature = "mockall")]
+        use mockall::automock;
+        #[cfg_attr(feature = "mockall", automock)]
+        #[cfg_attr(feature = "mockall", allow(dead_code))] // Don't warn on not using mocked functions.
+        mod functions {
+            use super::*;
+        "#,
+        &bindings_fns_only,
+        r#"
+        }
+        #[cfg(not(feature = "mockall"))]
+        pub use functions::*;
+        #[cfg(feature = "mockall")]
+        pub use mock_functions::*;
+        "#,
+        &bindings_except_fns,
+    ]
+    .join("");
+
+    let out_path = PathBuf::from(env::var("OUT_DIR").unwrap()).join("bindings.rs");
+    fs::write(out_path, bindings.as_bytes()).expect("Could not write bindings!");
+
+    if !cfg!(feature = "mockall") {
+        handle_platform(&crate_path);
+    }
 }
