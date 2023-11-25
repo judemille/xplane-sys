@@ -1,4 +1,7 @@
-# xplm-sys changelog
+# xplane-sys changelog
+
+## 4.0.103 -- 2023-11-25
+* Several fixes done for better integration with `xplane` crate.
 
 ## 4.0.101 -- 2023-07-31
 * Build-time dependency on bindgen re-added. Allows for multiple SDK version levels.
