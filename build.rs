@@ -32,6 +32,10 @@ fn get_clang_args(crate_path: &Path) -> Vec<String> {
         r.push("-DXPLM200".to_string());
     }
 
+    if cfg!(feature = "fmod") {
+        r.push("-D_FMOD_STUB_".to_string());
+    }
+
     let cheaders = crate_path.join("XPlaneSDK/CHeaders");
     let xplmheaders = cheaders.join("XPLM");
     let widgetheaders = cheaders.join("Widgets");
@@ -46,12 +50,14 @@ fn handle_platform(crate_path: &Path) {
     let triple = Triple::from_str(&target).unwrap();
     match triple.operating_system {
         OperatingSystem::Windows => {
-            assert!(
-                triple.architecture == Architecture::X86_64,
+            assert_eq!(
+                triple.architecture,
+                Architecture::X86_64,
                 "Unsupported target architecture! xplane-sys on Windows only supports x86_64."
             );
-            assert!(
-                triple.environment == Environment::Msvc,
+            assert_eq!(
+                triple.environment,
+                Environment::Msvc,
                 "Unsupported environment! X-Plane uses the MSVC ABI. Compile for that target."
             );
             let library_path = crate_path.join("SDK/Libraries/Win");
@@ -61,7 +67,7 @@ fn handle_platform(crate_path: &Path) {
         }
         OperatingSystem::MacOSX { .. } => {
             match triple.architecture {
-                Architecture::Aarch64(_) | Architecture::X86_64 => {},
+                Architecture::Aarch64(_) | Architecture::X86_64 => {}
                 _ => panic!("Unsupported target architecture! xplane-sys on Mac only supports x86_64 or aarch64.")
             };
             let library_path = crate_path.join("SDK/Libraries/Mac");
@@ -73,11 +79,12 @@ fn handle_platform(crate_path: &Path) {
             println!("cargo:rustc-link-lib=framework=XPWidgets");
         }
         OperatingSystem::Linux => {
-            assert!(
-                triple.architecture == Architecture::X86_64,
+            assert_eq!(
+                triple.architecture,
+                Architecture::X86_64,
                 "Unsupported target architecture! xplane-sys on Linux only supports x86_64."
             );
-            assert!(triple.environment == Environment::Gnu, "Unsupported environment! X-Plane runs on the GNU ABI on Linux, and so xplane-sys requires a GNU target.");
+            assert_eq!(triple.environment, Environment::Gnu, "Unsupported environment! X-Plane runs on the GNU ABI on Linux, and so xplane-sys requires a GNU target.");
         } // No need to link libraries on Linux.
         _ => panic!(
             "Unsupported operating system! The X-Plane SDK only supports Windows, Mac, and Linux."
@@ -87,6 +94,7 @@ fn handle_platform(crate_path: &Path) {
 
 #[derive(Debug)]
 struct NamingHandler;
+
 impl ParseCallbacks for NamingHandler {
     fn int_macro(&self, name: &str, _value: i64) -> Option<IntKind> {
         if name.starts_with("XPLM_VK") || name.starts_with("XPLM_KEY") {
@@ -206,27 +214,29 @@ fn main() {
 
     let bindings_fns_only = bindings_builder
         .with_codegen_config(bindgen::CodegenConfig::FUNCTIONS)
+        .blocklist_function("__va_start") // This symbol breaks builds on Windows, and is unneeded.
+        .blocklist_function("__report_gsfailure") // Likewise.
         .generate()
         .expect("Unable to generate bindings!")
         .to_string();
 
     let bindings = &[
-        r#"
-        #[cfg(feature = "mockall")]
-        use mockall::automock;
-        #[cfg_attr(feature = "mockall", automock)]
-        #[cfg_attr(feature = "mockall", allow(dead_code))] // Don't warn on not using mocked functions.
-        mod functions {
-            use super::*;
-        "#,
+        r#"#[cfg(feature = "mockall")]
+use mockall::automock;
+#[cfg_attr(feature = "mockall", automock)]
+#[cfg_attr(feature = "mockall", allow(dead_code))] // Don't warn on not using mocked functions.
+mod functions {
+    use super::*;
+"#,
         &bindings_fns_only,
-        r#"
-        }
-        #[cfg(not(feature = "mockall"))]
-        pub use functions::*;
-        #[cfg(feature = "mockall")]
-        pub use mock_functions::*;
-        "#,
+        r#"}
+#[cfg(not(feature = "mockall"))]
+#[doc(inline)]
+pub use functions::*;
+#[cfg(feature = "mockall")]
+#[doc(inline)]
+pub use mock_functions::*;
+"#,
         &bindings_except_fns,
     ]
     .join("");

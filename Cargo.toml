@@ -26,6 +26,8 @@ XPLM301 = ["XPLM300"]
 XPLM300 = ["XPLM210"]
 XPLM210 = ["XPLM200"]
 XPLM200 = []
+fmod = []
+mockall = ["dep:mockall"]
 
 [package.metadata.docs.rs]
 features = ["XPLM400"]

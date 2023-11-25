@@ -2,6 +2,18 @@
 /*
  * This file includes all the XPLM and XPWidgets headers
  */
+
+#ifdef _FMOD_STUB_
+#define _FMOD_COMMON_H
+// Basic definitions to make bindings possible.
+typedef void FMOD_STUDIO_SYSTEM;
+typedef void FMOD_CHANNELGROUP;
+typedef int FMOD_RESULT;
+typedef int FMOD_SOUND_FORMAT;
+typedef void FMOD_CHANNEL;
+typedef void FMOD_VECTOR;
+#endif
+
 #include <XPStandardWidgets.h>
 #include <XPUIGraphics.h>
 #include <XPWidgetDefs.h>
