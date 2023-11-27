@@ -63,14 +63,13 @@ extern "C" {
  *
  */
 
-typedef enum {
-    /* Control the camera until the user picks a new view.                        */
-    xplm_ControlCameraUntilViewChanges       = 1,
+typedef enum : uint32_t {
+  /* Control the camera until the user picks a new view. */
+  xplm_ControlCameraUntilViewChanges = 1,
 
-    /* Control the camera until your plugin is disabled or another plugin forcibly*
-     * takes control.                                                             */
-    xplm_ControlCameraForever                = 2,
-
+  /* Control the camera until your plugin is disabled or another plugin
+   * forcibly* takes control. */
+  xplm_ControlCameraForever = 2,
 
 } XPLMCameraControlDuration;
 

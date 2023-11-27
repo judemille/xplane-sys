@@ -175,22 +175,21 @@ typedef int XPLMPluginID;
  *
  */
 
-typedef enum {
-    /* The shift key is down                                                      */
-    xplm_ShiftFlag                           = 1,
+typedef enum : uint32_t {
+  /* The shift key is down */
+  xplm_ShiftFlag = 1,
 
-    /* The option or alt key is down                                              */
-    xplm_OptionAltFlag                       = 2,
+  /* The option or alt key is down */
+  xplm_OptionAltFlag = 2,
 
-    /* The control key is down                                                    */
-    xplm_ControlFlag                         = 4,
+  /* The control key is down */
+  xplm_ControlFlag = 4,
 
-    /* The key is being pressed down                                              */
-    xplm_DownFlag                            = 8,
+  /* The key is being pressed down */
+  xplm_DownFlag = 8,
 
-    /* The key is being released                                                  */
-    xplm_UpFlag                              = 16,
-
+  /* The key is being released */
+  xplm_UpFlag = 16,
 
 } XPLMKeyFlags;
 

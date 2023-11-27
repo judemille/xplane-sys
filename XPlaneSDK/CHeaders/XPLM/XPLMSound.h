@@ -41,34 +41,34 @@ extern "C" {
  *
  */
 
-typedef enum {
-    /* Incoming speech on COM1                                                    */
-    xplm_AudioRadioCom1                      = 0,
+typedef enum : uint32_t {
+  /* Incoming speech on COM1 */
+  xplm_AudioRadioCom1 = 0,
 
-    /* Incoming speech on COM2                                                    */
-    xplm_AudioRadioCom2                      = 1,
+  /* Incoming speech on COM2 */
+  xplm_AudioRadioCom2 = 1,
 
-    /* Pilot's own speech                                                         */
-    xplm_AudioRadioPilot                     = 2,
+  /* Pilot's own speech */
+  xplm_AudioRadioPilot = 2,
 
-    /* Copilot's own speech                                                       */
-    xplm_AudioRadioCopilot                   = 3,
+  /* Copilot's own speech */
+  xplm_AudioRadioCopilot = 3,
 
-    xplm_AudioExteriorAircraft               = 4,
+  xplm_AudioExteriorAircraft = 4,
 
-    xplm_AudioExteriorEnvironment            = 5,
+  xplm_AudioExteriorEnvironment = 5,
 
-    xplm_AudioExteriorUnprocessed            = 6,
+  xplm_AudioExteriorUnprocessed = 6,
 
-    xplm_AudioInterior                       = 7,
+  xplm_AudioInterior = 7,
 
-    xplm_AudioUI                             = 8,
+  xplm_AudioUI = 8,
 
-    /* Dedicated ground vehicle cable                                             */
-    xplm_AudioGround                         = 9,
+  /* Dedicated ground vehicle cable */
+  xplm_AudioGround = 9,
 
-    /* Master bus. Not normally to be used directly.                              */
-    xplm_Master                              = 10,
+  /* Master bus. Not normally to be used directly. */
+  xplm_Master = 10,
 } XPLMAudioBus;
 
 /*
@@ -79,14 +79,13 @@ typedef enum {
  *
  */
 
-typedef enum {
-    /* Master bank. Handles all aircraft and environmental audio.                 */
-    xplm_MasterBank                          = 0,
+typedef enum : uint32_t {
+  /* Master bank. Handles all aircraft and environmental audio. */
+  xplm_MasterBank = 0,
 
-    /* Radio bank. Handles COM1/COM2/GND/Pilot/Copilot.                           */
-    xplm_RadioBank                           = 1,
+  /* Radio bank. Handles COM1/COM2/GND/Pilot/Copilot. */
+  xplm_RadioBank = 1,
 } XPLMBankID;
-
 
 /* 
  * If you want to get full access to FMOD sound features, you need to include fmod.h or fmod.hpp yourself FIRST.

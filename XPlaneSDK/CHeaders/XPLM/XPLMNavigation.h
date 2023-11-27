@@ -46,32 +46,32 @@ extern "C" {
  *
  */
 
-typedef enum {
-    xplm_Nav_Unknown                         = 0,
+typedef enum : uint32_t {
+  xplm_Nav_Unknown = 0,
 
-    xplm_Nav_Airport                         = 1,
+  xplm_Nav_Airport = 1,
 
-    xplm_Nav_NDB                             = 2,
+  xplm_Nav_NDB = 2,
 
-    xplm_Nav_VOR                             = 4,
+  xplm_Nav_VOR = 4,
 
-    xplm_Nav_ILS                             = 8,
+  xplm_Nav_ILS = 8,
 
-    xplm_Nav_Localizer                       = 16,
+  xplm_Nav_Localizer = 16,
 
-    xplm_Nav_GlideSlope                      = 32,
+  xplm_Nav_GlideSlope = 32,
 
-    xplm_Nav_OuterMarker                     = 64,
+  xplm_Nav_OuterMarker = 64,
 
-    xplm_Nav_MiddleMarker                    = 128,
+  xplm_Nav_MiddleMarker = 128,
 
-    xplm_Nav_InnerMarker                     = 256,
+  xplm_Nav_InnerMarker = 256,
 
-    xplm_Nav_Fix                             = 512,
+  xplm_Nav_Fix = 512,
 
-    xplm_Nav_DME                             = 1024,
+  xplm_Nav_DME = 1024,
 
-    xplm_Nav_LatLon                          = 2048,
+  xplm_Nav_LatLon = 2048,
 } XPLMNavType;
 
 /*

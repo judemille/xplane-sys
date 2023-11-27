@@ -141,28 +141,27 @@ typedef void * XPLMDataRef;
  *
  */
 
-typedef enum {
-    /* Data of a type the current XPLM doesn't do.                                */
-    xplmType_Unknown                         = 0,
+typedef enum : uint32_t {
+  /* Data of a type the current XPLM doesn't do. */
+  xplmType_Unknown = 0,
 
-    /* A single 4-byte integer, native endian.                                    */
-    xplmType_Int                             = 1,
+  /* A single 4-byte integer, native endian. */
+  xplmType_Int = 1,
 
-    /* A single 4-byte float, native endian.                                      */
-    xplmType_Float                           = 2,
+  /* A single 4-byte float, native endian. */
+  xplmType_Float = 2,
 
-    /* A single 8-byte double, native endian.                                     */
-    xplmType_Double                          = 4,
+  /* A single 8-byte double, native endian. */
+  xplmType_Double = 4,
 
-    /* An array of 4-byte floats, native endian.                                  */
-    xplmType_FloatArray                      = 8,
+  /* An array of 4-byte floats, native endian. */
+  xplmType_FloatArray = 8,
 
-    /* An array of 4-byte integers, native endian.                                */
-    xplmType_IntArray                        = 16,
+  /* An array of 4-byte integers, native endian. */
+  xplmType_IntArray = 16,
 
-    /* A variable block of data.                                                  */
-    xplmType_Data                            = 32,
-
+  /* A variable block of data. */
+  xplmType_Data = 32,
 
 } XPLMDataTypeID;
 

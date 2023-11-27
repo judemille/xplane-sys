@@ -202,9 +202,8 @@ fn main() {
             is_bitfield: false,
             is_global: false,
         })
-        .bitfield_enum("XPLMDataTypeID")
-        .bitfield_enum("XPLMKeyFlags")
-        .bitfield_enum("XPLMNavType")
+        .bitfield_enum("(XPLMDataTypeID|XPLMKeyFlags|XPLMNavType)")
+        .no_debug("(XPLMDataTypeID|XPLMKeyFlags|XPLMNavType)")
         .parse_callbacks(Box::new(NamingHandler))
         .default_macro_constant_type(bindgen::MacroTypeVariation::Signed)
         .ignore_functions()

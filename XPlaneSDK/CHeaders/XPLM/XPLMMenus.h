@@ -60,15 +60,15 @@ extern "C" {
  *
  */
 
-typedef enum {
-    /* There is no symbol to the left of the menu item.                           */
-    xplm_Menu_NoCheck                        = 0,
+typedef enum : uint32_t {
+  /* There is no symbol to the left of the menu item. */
+  xplm_Menu_NoCheck = 0,
 
-    /* The menu has a mark next to it that is unmarked (not lit).                 */
-    xplm_Menu_Unchecked                      = 1,
+  /* The menu has a mark next to it that is unmarked (not lit). */
+  xplm_Menu_Unchecked = 1,
 
-    /* The menu has a mark next to it that is checked (lit).                      */
-    xplm_Menu_Checked                        = 2,
+  /* The menu has a mark next to it that is checked (lit). */
+  xplm_Menu_Checked = 2,
 } XPLMMenuCheck;
 
 /*

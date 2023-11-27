@@ -141,78 +141,78 @@ extern "C" {
  *
  */
 
-typedef enum {
+typedef enum : uint32_t {
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated as of XPLM302. This is the earliest point at which you can draw *
-     * in 3-d.                                                                    */
-    xplm_Phase_FirstScene                    = 0,
+  /* Deprecated as of XPLM302. This is the earliest point at which you can draw
+   * * in 3-d. */
+  xplm_Phase_FirstScene = 0,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated as of XPLM302. Drawing of land and water.                       */
-    xplm_Phase_Terrain                       = 5,
+  /* Deprecated as of XPLM302. Drawing of land and water. */
+  xplm_Phase_Terrain = 5,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated as of XPLM302. Drawing runways and other airport detail.        */
-    xplm_Phase_Airports                      = 10,
+  /* Deprecated as of XPLM302. Drawing runways and other airport detail. */
+  xplm_Phase_Airports = 10,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated as of XPLM302. Drawing roads, trails, trains, etc.              */
-    xplm_Phase_Vectors                       = 15,
+  /* Deprecated as of XPLM302. Drawing roads, trails, trains, etc. */
+  xplm_Phase_Vectors = 15,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated as of XPLM302. 3-d objects (houses, smokestacks, etc.           */
-    xplm_Phase_Objects                       = 20,
+  /* Deprecated as of XPLM302. 3-d objects (houses, smokestacks, etc. */
+  xplm_Phase_Objects = 20,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated as of XPLM302. External views of airplanes, both yours and the  *
-     * AI aircraft.                                                               */
-    xplm_Phase_Airplanes                     = 25,
+  /* Deprecated as of XPLM302. External views of airplanes, both yours and the *
+   * AI aircraft. */
+  xplm_Phase_Airplanes = 25,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated as of XPLM302. This is the last point at which you can draw in  *
-     * 3-d.                                                                       */
-    xplm_Phase_LastScene                     = 30,
+  /* Deprecated as of XPLM302. This is the last point at which you can draw in *
+   * 3-d. */
+  xplm_Phase_LastScene = 30,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM302)
-    /* A chance to do modern 3D drawing.                                          */
-    xplm_Phase_Modern3D                      = 31,
+  /* A chance to do modern 3D drawing. */
+  xplm_Phase_Modern3D = 31,
 
 #endif /* XPLM302 */
-    /* This is the first phase where you can draw in 2-d.                         */
-    xplm_Phase_FirstCockpit                  = 35,
+  /* This is the first phase where you can draw in 2-d. */
+  xplm_Phase_FirstCockpit = 35,
 
-    /* The non-moving parts of the aircraft panel.                                */
-    xplm_Phase_Panel                         = 40,
+  /* The non-moving parts of the aircraft panel. */
+  xplm_Phase_Panel = 40,
 
-    /* The moving parts of the aircraft panel.                                    */
-    xplm_Phase_Gauges                        = 45,
+  /* The moving parts of the aircraft panel. */
+  xplm_Phase_Gauges = 45,
 
-    /* Floating windows from plugins.                                             */
-    xplm_Phase_Window                        = 50,
+  /* Floating windows from plugins. */
+  xplm_Phase_Window = 50,
 
-    /* The last chance to draw in 2d.                                             */
-    xplm_Phase_LastCockpit                   = 55,
+  /* The last chance to draw in 2d. */
+  xplm_Phase_LastCockpit = 55,
 
 #if defined(XPLM200)
-    /* Removed as of XPLM300; Use the full-blown XPLMMap API instead.             */
-    xplm_Phase_LocalMap3D                    = 100,
+  /* Removed as of XPLM300; Use the full-blown XPLMMap API instead. */
+  xplm_Phase_LocalMap3D = 100,
 
 #endif /* XPLM200 */
 #if defined(XPLM200)
-    /* Removed as of XPLM300; Use the full-blown XPLMMap API instead.             */
-    xplm_Phase_LocalMap2D                    = 101,
+  /* Removed as of XPLM300; Use the full-blown XPLMMap API instead. */
+  xplm_Phase_LocalMap2D = 101,
 
 #endif /* XPLM200 */
 #if defined(XPLM200)
-    /* Removed as of XPLM300; Use the full-blown XPLMMap API instead.             */
-    xplm_Phase_LocalMapProfile               = 102,
+  /* Removed as of XPLM300; Use the full-blown XPLMMap API instead. */
+  xplm_Phase_LocalMapProfile = 102,
 
 #endif /* XPLM200 */
 
@@ -303,61 +303,60 @@ XPLM_API int        XPLMUnregisterDrawCallback(
  *
  */
 
-typedef enum {
-    /* GNS430, pilot side.                                                        */
-    xplm_device_GNS430_1                     = 0,
+typedef enum : uint32_t {
+  /* GNS430, pilot side. */
+  xplm_device_GNS430_1 = 0,
 
-    /* GNS430, copilot side.                                                      */
-    xplm_device_GNS430_2                     = 1,
+  /* GNS430, copilot side. */
+  xplm_device_GNS430_2 = 1,
 
-    /* GNS530, pilot side.                                                        */
-    xplm_device_GNS530_1                     = 2,
+  /* GNS530, pilot side. */
+  xplm_device_GNS530_1 = 2,
 
-    /* GNS530, copilot side.                                                      */
-    xplm_device_GNS530_2                     = 3,
+  /* GNS530, copilot side. */
+  xplm_device_GNS530_2 = 3,
 
-    /* generic airliner CDU, pilot side.                                          */
-    xplm_device_CDU739_1                     = 4,
+  /* generic airliner CDU, pilot side. */
+  xplm_device_CDU739_1 = 4,
 
-    /* generic airliner CDU, copilot side.                                        */
-    xplm_device_CDU739_2                     = 5,
+  /* generic airliner CDU, copilot side. */
+  xplm_device_CDU739_2 = 5,
 
-    /* G1000 Primary Flight Display, pilot side.                                  */
-    xplm_device_G1000_PFD_1                  = 6,
+  /* G1000 Primary Flight Display, pilot side. */
+  xplm_device_G1000_PFD_1 = 6,
 
-    /* G1000 Multifunction Display.                                               */
-    xplm_device_G1000_MFD                    = 7,
+  /* G1000 Multifunction Display. */
+  xplm_device_G1000_MFD = 7,
 
-    /* G1000 Primary Flight Display, copilot side.                                */
-    xplm_device_G1000_PFD_2                  = 8,
+  /* G1000 Primary Flight Display, copilot side. */
+  xplm_device_G1000_PFD_2 = 8,
 
-    /* Primus CDU, pilot side.                                                    */
-    xplm_device_CDU815_1                     = 9,
+  /* Primus CDU, pilot side. */
+  xplm_device_CDU815_1 = 9,
 
-    /* Primus CDU, copilot side.                                                  */
-    xplm_device_CDU815_2                     = 10,
+  /* Primus CDU, copilot side. */
+  xplm_device_CDU815_2 = 10,
 
-    /* Primus Primary Flight Display, pilot side.                                 */
-    xplm_device_Primus_PFD_1                 = 11,
+  /* Primus Primary Flight Display, pilot side. */
+  xplm_device_Primus_PFD_1 = 11,
 
-    /* Primus Primary Flight Display, copilot side.                               */
-    xplm_device_Primus_PFD_2                 = 12,
+  /* Primus Primary Flight Display, copilot side. */
+  xplm_device_Primus_PFD_2 = 12,
 
-    /* Primus Multifunction Display, pilot side.                                  */
-    xplm_device_Primus_MFD_1                 = 13,
+  /* Primus Multifunction Display, pilot side. */
+  xplm_device_Primus_MFD_1 = 13,
 
-    /* Primus Multifunction Display, copilot side.                                */
-    xplm_device_Primus_MFD_2                 = 14,
+  /* Primus Multifunction Display, copilot side. */
+  xplm_device_Primus_MFD_2 = 14,
 
-    /* Primus Multifunction Display, central.                                     */
-    xplm_device_Primus_MFD_3                 = 15,
+  /* Primus Multifunction Display, central. */
+  xplm_device_Primus_MFD_3 = 15,
 
-    /* Primus Radio Management Unit, pilot side.                                  */
-    xplm_device_Primus_RMU_1                 = 16,
+  /* Primus Radio Management Unit, pilot side. */
+  xplm_device_Primus_RMU_1 = 16,
 
-    /* Primus Radio Management Unit, copilot side.                                */
-    xplm_device_Primus_RMU_2                 = 17,
-
+  /* Primus Radio Management Unit, copilot side. */
+  xplm_device_Primus_RMU_2 = 17,
 
 } XPLMDeviceID;
 
@@ -554,12 +553,12 @@ typedef void (* XPLMHandleKey_f)(
  *
  */
 
-typedef enum {
-    xplm_MouseDown                           = 1,
+typedef enum : uint32_t {
+  xplm_MouseDown = 1,
 
-    xplm_MouseDrag                           = 2,
+  xplm_MouseDrag = 2,
 
-    xplm_MouseUp                             = 3,
+  xplm_MouseUp = 3,
 } XPLMMouseStatus;
 
 /*
@@ -603,18 +602,18 @@ typedef int (* XPLMHandleMouseClick_f)(
  *
  */
 
-typedef enum {
-    /* X-Plane manages the cursor normally, plugin does not affect the cusrsor.   */
-    xplm_CursorDefault                       = 0,
+typedef enum : uint32_t {
+  /* X-Plane manages the cursor normally, plugin does not affect the cusrsor. */
+  xplm_CursorDefault = 0,
 
-    /* X-Plane hides the cursor.                                                  */
-    xplm_CursorHidden                        = 1,
+  /* X-Plane hides the cursor. */
+  xplm_CursorHidden = 1,
 
-    /* X-Plane shows the cursor as the default arrow.                             */
-    xplm_CursorArrow                         = 2,
+  /* X-Plane shows the cursor as the default arrow. */
+  xplm_CursorArrow = 2,
 
-    /* X-Plane shows the cursor but lets you select an OS cursor.                 */
-    xplm_CursorCustom                        = 3,
+  /* X-Plane shows the cursor but lets you select an OS cursor. */
+  xplm_CursorCustom = 3,
 } XPLMCursorStatus;
 #endif /* XPLM200 */
 
@@ -706,21 +705,21 @@ typedef int (* XPLMHandleMouseWheel_f)(
  *
  */
 
-typedef enum {
-    /* The lowest layer, used for HUD-like displays while flying.                 */
-    xplm_WindowLayerFlightOverlay            = 0,
+typedef enum : uint32_t {
+  /* The lowest layer, used for HUD-like displays while flying. */
+  xplm_WindowLayerFlightOverlay = 0,
 
-    /* Windows that "float" over the sim, like the X-Plane 11 map does. If you are*
-     * not sure which layer to create your window in, choose floating.            */
-    xplm_WindowLayerFloatingWindows          = 1,
+  /* Windows that "float" over the sim, like the X-Plane 11 map does. If you
+   * are* not sure which layer to create your window in, choose floating. */
+  xplm_WindowLayerFloatingWindows = 1,
 
-    /* An interruptive modal that covers the sim with a transparent black overlay *
-     * to draw the user's focus to the alert                                      */
-    xplm_WindowLayerModal                    = 2,
+  /* An interruptive modal that covers the sim with a transparent black overlay
+   * * to draw the user's focus to the alert */
+  xplm_WindowLayerModal = 2,
 
-    /* "Growl"-style notifications that are visible in a corner of the screen,    *
-     * even over modals                                                           */
-    xplm_WindowLayerGrowlNotifications       = 3,
+  /* "Growl"-style notifications that are visible in a corner of the screen, *
+   * even over modals */
+  xplm_WindowLayerGrowlNotifications = 3,
 } XPLMWindowLayer;
 #endif /* XPLM300 */
 
@@ -737,26 +736,27 @@ typedef enum {
  *
  */
 
-typedef enum {
-    /* X-Plane will draw no decoration for your window, and apply no automatic    *
-     * click handlers. The window will not stop click from passing through its    *
-     * bounds. This is suitable for "windows" which request, say, the full screen *
-     * bounds, then only draw in a small portion of the available area.           */
-    xplm_WindowDecorationNone                = 0,
+typedef enum : uint32_t {
+  /* X-Plane will draw no decoration for your window, and apply no automatic *
+   * click handlers. The window will not stop click from passing through its *
+   * bounds. This is suitable for "windows" which request, say, the full screen
+   * * bounds, then only draw in a small portion of the available area. */
+  xplm_WindowDecorationNone = 0,
 
-    /* The default decoration for "native" windows, like the map. Provides a solid*
-     * background, as well as click handlers for resizing and dragging the window.*/
-    xplm_WindowDecorationRoundRectangle      = 1,
+  /* The default decoration for "native" windows, like the map. Provides a
+   * solid* background, as well as click handlers for resizing and dragging the
+   * window.*/
+  xplm_WindowDecorationRoundRectangle = 1,
 
-    /* X-Plane will draw no decoration for your window, nor will it provide resize*
-     * handlers for your window edges, but it will stop clicks from passing       *
-     * through your windows bounds.                                               */
-    xplm_WindowDecorationSelfDecorated       = 2,
+  /* X-Plane will draw no decoration for your window, nor will it provide
+   * resize* handlers for your window edges, but it will stop clicks from
+   * passing       * through your windows bounds. */
+  xplm_WindowDecorationSelfDecorated = 2,
 
-    /* Like self-decorated, but with resizing; X-Plane will draw no decoration for*
-     * your window, but it will stop clicks from passing through your windows     *
-     * bounds, and provide automatic mouse handlers for resizing.                 */
-    xplm_WindowDecorationSelfDecoratedResizable = 3,
+  /* Like self-decorated, but with resizing; X-Plane will draw no decoration
+   * for* your window, but it will stop clicks from passing through your windows
+   * * bounds, and provide automatic mouse handlers for resizing. */
+  xplm_WindowDecorationSelfDecoratedResizable = 3,
 } XPLMWindowDecoration;
 #endif /* XPLM301 */
 
@@ -1323,30 +1323,30 @@ XPLM_API void       XPLMSetWindowResizingLimits(
  *
  */
 
-typedef enum {
-    /* The default positioning mode. Set the window geometry and its future       *
-     * position will be determined by its window gravity, resizing limits, and    *
-     * user interactions.                                                         */
-    xplm_WindowPositionFree                  = 0,
+typedef enum : uint32_t {
+  /* The default positioning mode. Set the window geometry and its future *
+   * position will be determined by its window gravity, resizing limits, and *
+   * user interactions. */
+  xplm_WindowPositionFree = 0,
 
-    /* Keep the window centered on the monitor you specify                        */
-    xplm_WindowCenterOnMonitor               = 1,
+  /* Keep the window centered on the monitor you specify */
+  xplm_WindowCenterOnMonitor = 1,
 
-    /* Keep the window full screen on the monitor you specify                     */
-    xplm_WindowFullScreenOnMonitor           = 2,
+  /* Keep the window full screen on the monitor you specify */
+  xplm_WindowFullScreenOnMonitor = 2,
 
-    /* Like gui_window_full_screen_on_monitor, but stretches over *all* monitors  *
-     * and popout windows. This is an obscure one... unless you have a very good  *
-     * reason to need it, you probably don't!                                     */
-    xplm_WindowFullScreenOnAllMonitors       = 3,
+  /* Like gui_window_full_screen_on_monitor, but stretches over *all* monitors *
+   * and popout windows. This is an obscure one... unless you have a very good *
+   * reason to need it, you probably don't! */
+  xplm_WindowFullScreenOnAllMonitors = 3,
 
-    /* A first-class window in the operating system, completely separate from the *
-     * X-Plane window(s)                                                          */
-    xplm_WindowPopOut                        = 4,
+  /* A first-class window in the operating system, completely separate from the
+   * * X-Plane window(s) */
+  xplm_WindowPopOut = 4,
 
 #if defined(XPLM301)
-    /* A floating window visible on the VR headset                                */
-    xplm_WindowVR                            = 5,
+  /* A floating window visible on the VR headset */
+  xplm_WindowVR = 5,
 
 #endif /* XPLM301 */
 

@@ -66,10 +66,10 @@ extern "C" {
  *
  */
 
-typedef enum {
-    /* The Y probe gives you the location of the tallest physical scenery along   *
-     * the Y axis going through the queried point.                                */
-    xplm_ProbeY                              = 0,
+typedef enum : uint32_t {
+  /* The Y probe gives you the location of the tallest physical scenery along *
+   * the Y axis going through the queried point. */
+  xplm_ProbeY = 0,
 } XPLMProbeType;
 
 /*
@@ -79,17 +79,17 @@ typedef enum {
  *
  */
 
-typedef enum {
-    /* The probe hit terrain and returned valid values.                           */
-    xplm_ProbeHitTerrain                     = 0,
+typedef enum : uint32_t {
+  /* The probe hit terrain and returned valid values. */
+  xplm_ProbeHitTerrain = 0,
 
-    /* An error in the API call.  Either the probe struct size is bad, the probe  *
-     * is invalid, or the type is mismatched for the specific query call.         */
-    xplm_ProbeError                          = 1,
+  /* An error in the API call.  Either the probe struct size is bad, the probe *
+   * is invalid, or the type is mismatched for the specific query call. */
+  xplm_ProbeError = 1,
 
-    /* The probe call succeeded but there is no terrain under this point (perhaps *
-     * it is off the side of the planet?)                                         */
-    xplm_ProbeMissed                         = 2,
+  /* The probe call succeeded but there is no terrain under this point (perhaps
+   * * it is off the side of the planet?) */
+  xplm_ProbeMissed = 2,
 } XPLMProbeResult;
 
 /*

@@ -68,18 +68,18 @@ extern "C" {
  *  via the Widgets library.
  *
  */
-typedef enum {
-    /* The bitmap that contains window outlines, button outlines, fonts, etc.     */
-    xplm_Tex_GeneralInterface                = 0,
+typedef enum : uint32_t {
+  /* The bitmap that contains window outlines, button outlines, fonts, etc. */
+  xplm_Tex_GeneralInterface = 0,
 
 #if defined(XPLM_DEPRECATED)
-    /* The exterior paint for the user's aircraft (daytime).                      */
-    xplm_Tex_AircraftPaint                   = 1,
+  /* The exterior paint for the user's aircraft (daytime). */
+  xplm_Tex_AircraftPaint = 1,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* The exterior light map for the user's aircraft.                            */
-    xplm_Tex_AircraftLiteMap                 = 2,
+  /* The exterior light map for the user's aircraft. */
+  xplm_Tex_AircraftLiteMap = 2,
 
 #endif /* XPLM_DEPRECATED */
 
@@ -260,98 +260,99 @@ XPLM_API void       XPLMDrawTranslucentDarkBox(
  *
  */
 
-typedef enum {
-    /* Mono-spaced font for user interface.  Available in all versions of the SDK.*/
-    xplmFont_Basic                           = 0,
+typedef enum : uint32_t {
+  /* Mono-spaced font for user interface.  Available in all versions of the
+     SDK.*/
+  xplmFont_Basic = 0,
 
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_Menus                           = 1,
-
-#endif /* XPLM_DEPRECATED */
-#if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_Metal                           = 2,
+  /* Deprecated, do not use. */
+  xplmFont_Menus = 1,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_Led                             = 3,
+  /* Deprecated, do not use. */
+  xplmFont_Metal = 2,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_LedWide                         = 4,
+  /* Deprecated, do not use. */
+  xplmFont_Led = 3,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_PanelHUD                        = 5,
+  /* Deprecated, do not use. */
+  xplmFont_LedWide = 4,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_PanelEFIS                       = 6,
+  /* Deprecated, do not use. */
+  xplmFont_PanelHUD = 5,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_PanelGPS                        = 7,
+  /* Deprecated, do not use. */
+  xplmFont_PanelEFIS = 6,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_RadiosGA                        = 8,
+  /* Deprecated, do not use. */
+  xplmFont_PanelGPS = 7,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_RadiosBC                        = 9,
+  /* Deprecated, do not use. */
+  xplmFont_RadiosGA = 8,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_RadiosHM                        = 10,
+  /* Deprecated, do not use. */
+  xplmFont_RadiosBC = 9,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_RadiosGANarrow                  = 11,
+  /* Deprecated, do not use. */
+  xplmFont_RadiosHM = 10,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_RadiosBCNarrow                  = 12,
+  /* Deprecated, do not use. */
+  xplmFont_RadiosGANarrow = 11,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_RadiosHMNarrow                  = 13,
+  /* Deprecated, do not use. */
+  xplmFont_RadiosBCNarrow = 12,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_Timer                           = 14,
+  /* Deprecated, do not use. */
+  xplmFont_RadiosHMNarrow = 13,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_FullRound                       = 15,
+  /* Deprecated, do not use. */
+  xplmFont_Timer = 14,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_SmallRound                      = 16,
+  /* Deprecated, do not use. */
+  xplmFont_FullRound = 15,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM_DEPRECATED)
-    /* Deprecated, do not use.                                                    */
-    xplmFont_Menus_Localized                 = 17,
+  /* Deprecated, do not use. */
+  xplmFont_SmallRound = 16,
+
+#endif /* XPLM_DEPRECATED */
+#if defined(XPLM_DEPRECATED)
+  /* Deprecated, do not use. */
+  xplmFont_Menus_Localized = 17,
 
 #endif /* XPLM_DEPRECATED */
 #if defined(XPLM200)
-    /* Proportional UI font.                                                      */
-    xplmFont_Proportional                    = 18,
+  /* Proportional UI font. */
+  xplmFont_Proportional = 18,
 
 #endif /* XPLM200 */
 

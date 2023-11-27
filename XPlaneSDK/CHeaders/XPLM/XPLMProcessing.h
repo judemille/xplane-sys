@@ -57,12 +57,12 @@ extern "C" {
  *
  */
 
-typedef enum {
-    /* Your callback runs before X-Plane integrates the flight model.             */
-    xplm_FlightLoop_Phase_BeforeFlightModel  = 0,
+typedef enum : uint32_t {
+  /* Your callback runs before X-Plane integrates the flight model. */
+  xplm_FlightLoop_Phase_BeforeFlightModel = 0,
 
-    /* Your callback runs after X-Plane integrates the flight model.              */
-    xplm_FlightLoop_Phase_AfterFlightModel   = 1,
+  /* Your callback runs after X-Plane integrates the flight model. */
+  xplm_FlightLoop_Phase_AfterFlightModel = 1,
 } XPLMFlightLoopPhaseType;
 #endif /* XPLM210 */
 
