@@ -60,7 +60,7 @@ fn handle_platform(crate_path: &Path) {
                 Environment::Msvc,
                 "Unsupported environment! X-Plane uses the MSVC ABI. Compile for that target."
             );
-            let library_path = crate_path.join("SDK/Libraries/Win");
+            let library_path = crate_path.join("XPlaneSDK/Libraries/Win");
             println!("cargo:rustc-link-search={}", library_path.to_str().unwrap());
             println!("cargo:rustc-link-lib=XPLM_64");
             println!("cargo:rustc-link-lib=XPWidgets_64");
@@ -70,7 +70,7 @@ fn handle_platform(crate_path: &Path) {
                 Architecture::Aarch64(_) | Architecture::X86_64 => {}
                 _ => panic!("Unsupported target architecture! xplane-sys on Mac only supports x86_64 or aarch64.")
             };
-            let library_path = crate_path.join("SDK/Libraries/Mac");
+            let library_path = crate_path.join("XPlaneSDK/Libraries/Mac");
             println!(
                 "cargo:rustc-link-search-framework=framework={}",
                 library_path.to_str().unwrap()

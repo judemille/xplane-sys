@@ -13,7 +13,7 @@ edition = "2021"
 
 [dependencies]
 bitfield = "0.14"
-mockall = { version = "0.11", optional = true }
+mockall = { version = "~0.12", optional = true }
 
 [build-dependencies]
 bindgen = "0.69"
