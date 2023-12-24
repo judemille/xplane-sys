@@ -209,15 +209,18 @@ fn main() {
         .ignore_functions()
         .generate()
         .expect("Unable to generate bindings!")
-        .to_string();
+        .to_string()
+        .replace(r#"extern "C""#, r#"extern "C-unwind""#);
 
     let bindings_fns_only = bindings_builder
         .with_codegen_config(bindgen::CodegenConfig::FUNCTIONS)
         .blocklist_function("__va_start") // This symbol breaks builds on Windows, and is unneeded.
         .blocklist_function("__report_gsfailure") // Likewise.
+        .override_abi(bindgen::Abi::CUnwind, ".*")
         .generate()
         .expect("Unable to generate bindings!")
-        .to_string();
+        .to_string()
+        .replace(r#"extern "C""#, r#"extern "C-unwind""#);
 
     let bindings = &[
         r#"#[cfg(feature = "mockall")]
