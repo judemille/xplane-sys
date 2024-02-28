@@ -2,8 +2,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0 OR MIT
 
-target
-Cargo.lock
-*.DS_Store
-*/.DS_Store
-.vscode
+[submodule "sdk"]
+	path = sdk
+	url = https://git.sr.ht/~jdemille/x-plane-sdk

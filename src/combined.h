@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2024 Julia DeMille <me@jdemille.com
+//
+// SPDX-License-Identifier: Apache-2.0 OR MIT
 
 /*
  * This file includes all the XPLM and XPWidgets headers

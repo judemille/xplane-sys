@@ -1,4 +1,14 @@
+<!--
+SPDX-FileCopyrightText: 2024 Julia DeMille <me@jdemille.com
+
+SPDX-License-Identifier: Apache-2.0 OR MIT
+-->
+
 # xplane-sys changelog
+
+## 4.0.104 -- TODO
+* Added capability for stubs on Linux.
+* Repository is now REUSE compliant.
 
 ## 4.0.103 -- 2023-11-25
 * Several fixes done for better integration with `xplane` crate.

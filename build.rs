@@ -1,94 +1,105 @@
+// SPDX-FileCopyrightText: 2024 Julia DeMille <me@jdemille.com
+//
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+
 use bindgen::callbacks::{IntKind, ParseCallbacks};
 use bindgen::EnumVariation;
+use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
-use std::{env, str::FromStr};
-use target_lexicon::{Architecture, Environment, OperatingSystem, Triple};
 
 fn get_clang_args(crate_path: &Path) -> Vec<String> {
     let mut r = Vec::new();
-    r.push("-DLIN".to_string()); // Technically tells the headers they're being compiled for Linux.
-                                 // Doesn't matter for our use case -- the only things that are changed are irrelevant to bindgen.
+    r.push("-DLIN=1".to_string()); // Technically tells the headers they're being compiled for Linux.
+                                   // Doesn't matter for our use case -- the only things that are changed are irrelevant to bindgen.
     assert!(
         cfg!(feature = "XPLM200"),
         "Please set a desired SDK version!"
     );
-    if cfg!(feature = "XPLM400") {
-        r.push("-DXPLM400".to_string());
-    }
-    if cfg!(feature = "XPLM303") {
-        r.push("-DXPLM303".to_string());
-    }
-    if cfg!(feature = "XPLM301") {
-        r.push("-DXPLM301".to_string());
-    }
-    if cfg!(feature = "XPLM300") {
-        r.push("-DXPLM300".to_string());
-    }
-    if cfg!(feature = "XPLM210") {
-        r.push("-DXPLM210".to_string());
-    }
-    if cfg!(feature = "XPLM200") {
-        r.push("-DXPLM200".to_string());
-    }
+
+    let xplm_level = env::vars()
+        .filter_map(|(k, _)| match k.strip_prefix("CARGO_FEATURE_")? {
+            "XPLM400" => Some(400),
+            "XPLM303" => Some(303),
+            "XPLM302" => Some(302),
+            "XPLM301" => Some(301),
+            "XPLM300" => Some(300),
+            "XPLM210" => Some(210),
+            "XPLM200" => Some(200),
+            _ => None,
+        })
+        .max()
+        .unwrap();
+
+    r.push(format!("-DXPLM_LEVEL={xplm_level}"));
 
     if cfg!(feature = "fmod") {
         r.push("-D_FMOD_STUB_".to_string());
     }
 
-    let cheaders = crate_path.join("XPlaneSDK/CHeaders");
-    let xplmheaders = cheaders.join("XPLM");
-    let widgetheaders = cheaders.join("Widgets");
+    let xplmheaders = crate_path.join("sdk/xplm/include");
+    let widgetheaders = crate_path.join("sdk/xpwidgets/include");
     r.push(format!("-I{}", xplmheaders.to_str().unwrap()));
     r.push(format!("-I{}", widgetheaders.to_str().unwrap()));
 
     r
 }
 
+const ALLOWED_TARGETS_TEXT: &str = r"Supported targets for xplane-sys are:
+- x86_64-pc-windows-msvc
+- x86_64-apple-darwin
+- aarch64-apple-darwin
+- x86_64-unknown-linux-gnu
+";
+
 fn handle_platform(crate_path: &Path) {
     let target = env::var("TARGET").unwrap();
-    let triple = Triple::from_str(&target).unwrap();
-    match triple.operating_system {
-        OperatingSystem::Windows => {
-            assert_eq!(
-                triple.architecture,
-                Architecture::X86_64,
-                "Unsupported target architecture! xplane-sys on Windows only supports x86_64."
-            );
-            assert_eq!(
-                triple.environment,
-                Environment::Msvc,
-                "Unsupported environment! X-Plane uses the MSVC ABI. Compile for that target."
-            );
-            let library_path = crate_path.join("XPlaneSDK/Libraries/Win");
-            println!("cargo:rustc-link-search={}", library_path.to_str().unwrap());
+    match target.as_str() {
+        "x86_64-pc-windows-msvc" => {
+            let xplm_path = crate_path.join("sdk/xplm/lib");
+            let xpw_path = crate_path.join("sdk/xpwidgets/lib");
+            println!("cargo:rustc-link-search={}", xplm_path.to_str().unwrap());
+            println!("cargo:rustc-link-search={}", xpw_path.to_str().unwrap());
             println!("cargo:rustc-link-lib=XPLM_64");
             println!("cargo:rustc-link-lib=XPWidgets_64");
         }
-        OperatingSystem::MacOSX { .. } => {
-            match triple.architecture {
-                Architecture::Aarch64(_) | Architecture::X86_64 => {}
-                _ => panic!("Unsupported target architecture! xplane-sys on Mac only supports x86_64 or aarch64.")
-            };
-            let library_path = crate_path.join("XPlaneSDK/Libraries/Mac");
+        "x86_64-apple-darwin" | "aarch64-apple-darwin" => {
+            let xplm_path = crate_path.join("sdk/xplm/Frameworks");
             println!(
                 "cargo:rustc-link-search-framework=framework={}",
-                library_path.to_str().unwrap()
+                xplm_path.to_str().unwrap()
+            );
+            let xpw_path = crate_path.join("sdk/xpwidgets/Frameworks");
+            println!(
+                "cargo:rustc-link-search-framework=framework={}",
+                xpw_path.to_str().unwrap()
             );
             println!("cargo:rustc-link-lib=framework=XPLM");
             println!("cargo:rustc-link-lib=framework=XPWidgets");
         }
-        OperatingSystem::Linux => {
-            assert_eq!(
-                triple.architecture,
-                Architecture::X86_64,
-                "Unsupported target architecture! xplane-sys on Linux only supports x86_64."
-            );
-            assert_eq!(triple.environment, Environment::Gnu, "Unsupported environment! X-Plane runs on the GNU ABI on Linux, and so xplane-sys requires a GNU target.");
+        "x86_64-unknown-linux-gnu" => {
+            if cfg!(feature = "stub-linux") {
+                println!("cargo:rustc-link-arg=--no-allow-shlib-undefined");
+                let dst = cmake::Config::new("sdk")
+                    .build_target("all")
+                    .very_verbose(true)
+                    .build();
+                println!(
+                    "rustc-link-search={}",
+                    dst.join("xplm/src").to_str().unwrap()
+                );
+                println!(
+                    "rustc-link-search={}",
+                    dst.join("xpwidgets/src").to_str().unwrap()
+                );
+                println!("cargo:rustc-link-lib=dylib:+verbatim=XPLM_64.so");
+                println!("cargo:rustc-link-lib=dylib:+verbatim=XPWidgets_64.so");
+            }
         } // No need to link libraries on Linux.
-        _ => panic!(
-            "Unsupported operating system! The X-Plane SDK only supports Windows, Mac, and Linux."
-        ),
+        _ => {
+            eprintln!("{}", ALLOWED_TARGETS_TEXT);
+            panic!("unsupported target: {target}")
+        }
     };
 }
 

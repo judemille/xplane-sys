@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 Julia DeMille <me@jdemille.com
+#
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+
 [package]
 name = "xplane-sys"
 version = "4.0.103"
@@ -17,21 +21,25 @@ mockall = { version = "~0.12", optional = true }
 
 [build-dependencies]
 bindgen = "0.69"
-target-lexicon = "0.12.10"
+
+[target.'cfg(target_os = "linux")'.build-dependencies]
+cmake = "~0.1"
 
 [features]
 default = []
 XPLM400 = ["XPLM303"]
-XPLM303 = ["XPLM301"]
+XPLM303 = ["XPLM302"]
+XPLM302 = ["XPLM301"]
 XPLM301 = ["XPLM300"]
 XPLM300 = ["XPLM210"]
 XPLM210 = ["XPLM200"]
 XPLM200 = []
 fmod = []
 mockall = ["dep:mockall"]
+stub-linux = []
 
 [package.metadata.docs.rs]
-features = ["XPLM400", "fmod"]
+features = ["XPLM400"]
 targets = [
     "x86_64-unknown-linux-gnu",
     "x86_64-apple-darwin",

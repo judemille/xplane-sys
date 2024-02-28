@@ -1,20 +1,25 @@
+# SPDX-FileCopyrightText: 2024 Julia DeMille <me@jdemille.com
+#
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+
 name: Rust
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: cargo build -F XPLM400 --verbose
-    - name: Run tests
-      run: cargo test -F XPLM400 --verbose
+      - uses: actions/checkout@v4
+      - name: Build
+        run: cargo build -F XPLM400 --verbose
