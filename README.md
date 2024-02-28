@@ -12,8 +12,9 @@ This library provides Rust bindings to the X-Plane plugin SDK.
 
 ## SDK versions
 
-This crate is based on SDK version 4.0.1 (XPLM400), supporting X-Plane 12.04 and newer. Plugins made with this crate
-can be used with earlier versions of X-Plane, so long as the right feature gates are set. The gates are as follows:
+This crate is based on SDK version 4.0.1 (XPLM400), supporting X-Plane 12.04 and
+newer. Plugins made with this crate can be used with earlier versions of X-Plane, so
+long as the right feature gates are set. The gates are as follows:
 
 - `XPLM400` -- X-Plane 12.04 and newer.
 - `XPLM303` -- X-Plane 11.50 and newer.
@@ -21,17 +22,21 @@ can be used with earlier versions of X-Plane, so long as the right feature gates
 - `XPLM300` -- X-Plane 11.10 and newer.
 - `XPLM210` -- X-Plane 10.20 and newer. (actually 10.00 and newer, but this crate forbids 32-bit plugins.)
 
-Unlike the X-Plane C SDK, this crate automatically infers older versions from requesting a newer version, so no need
-to define all the versions up to your desired version. Features from SDK versions newer than the requested version *can*
-be used, if you perform a check on the SDK version level at runtime. At that point, if the version is high enough,
-you can request a pointer to the desired function. This is outlined in the X-Plane documentation. This allows the
-support of a range of versions, while also allowing access to newer features if present.
+Unlike the X-Plane C SDK shipped by Laminar, this crate automatically infers older
+versions from requesting a newer version, so no need to define all the versions up
+to your desired version. Features from SDK versions newer than the requested version
+*can* be used, if you perform a check on the SDK version level at runtime. At that
+point, if the version is high enough, you can request a pointer to the desired
+function. This is outlined in the X-Plane documentation. This allows the support of
+a range of versions, while also allowing access to newer features if present.
 
-Some features from earlier SDK versions have been deprecated. This crate does not provide a way to access them.
-Realistically, if you are using gates below `XPLM303`, you are nuts. The feature gates are included, but X-Plane 11.50
-was released in 2020, so most users should have it, even if they are not on X-Plane 12.
+Some features from earlier SDK versions have been deprecated. This crate does not
+provide a way to access them. Realistically, if you are using gates below `XPLM303`,
+you are nuts. The feature gates are included, but X-Plane 11.50 was released in 2020,
+so most users should have it, even if they are not on X-Plane 12.
 
-This crate will be updated as the X-Plane SDK updates, and will have an equal version number. (except in extraneous circumstances)
+This crate will be updated as the X-Plane SDK updates, and will have an equal
+version number. (except in extraneous circumstances)
 
 ## Documentation
 
@@ -71,22 +76,25 @@ commands fix that.
 
 ## Disclaimer
 
-The current maintainer of this project is a trans lesbian who unequivocally supports Ukraine,
-and opposes any and all human rights violations.
+The current maintainer of this project is a trans lesbian who unequivocally supports
+Ukraine against Russia, and opposes any and all human rights violations.
 
 ### *You should not use this project if you:*
 
-- Do not unequivocally support the LGBTQ+ population, including transgender individuals.
+- Do not unequivocally support the LGBTQ+ population, including transgender
+  individuals.
 - Think that LGBTQ+ people "shouldn't put it out on display"
 - Support "drop the T", TERF, or similar movements.
-- Think that pedophilia is included in LGBTQ+, either because you want it to be included, or you think
-  that the community accepts it. It does not accept it.
-- Refuse to address and refer to people with their preferred name, pronouns, and gender labels.
+- Think that pedophilia is included in LGBTQ+, either because you want it to be
+  included, or you think that the community accepts it. It does not accept it.
+- Refuse to address and refer to people with their preferred name, pronouns, and
+  gender labels.
 - Do not support Ukraine's struggle against their Russian oppressors.
-- Support any far-right parties or politicians (including Vladimir Putin, the GOP, AfD, FdI, and similar)
+- Support any far-right parties or politicians (including Vladimir Putin, the GOP,
+  AfD, FdI, and similar)
 
-I cannot stop you, but anyone observed to meet the above listed criteria who interacts with the project
-will be blocked from posting issues or pull requests.
+I cannot stop you, but anyone observed to meet the above listed criteria who
+interacts with the project will be blocked from further interaction.
 
 ## License
 
@@ -108,6 +116,7 @@ additional terms or conditions.
 
 ## Unit Testing
 
-The `mockall` feature of this crate is intended to be enabled when unit testing a crate that uses this crate.
-All functions will be mocked, using [mockall.](https://github.com/asomers/mockall) This crate currently exposes
+The `mockall` feature of this crate is intended to be enabled when unit testing a
+crate that uses this crate. All functions will be mocked, using
+[mockall.](https://github.com/asomers/mockall) This crate currently exposes
 `mockall = "~0.12"`.

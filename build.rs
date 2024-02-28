@@ -10,8 +10,6 @@ use std::path::{Path, PathBuf};
 
 fn get_clang_args(crate_path: &Path) -> Vec<String> {
     let mut r = Vec::new();
-    r.push("-DLIN=1".to_string()); // Technically tells the headers they're being compiled for Linux.
-                                   // Doesn't matter for our use case -- the only things that are changed are irrelevant to bindgen.
     assert!(
         cfg!(feature = "XPLM200"),
         "Please set a desired SDK version!"
@@ -32,6 +30,7 @@ fn get_clang_args(crate_path: &Path) -> Vec<String> {
         .unwrap();
 
     r.push(format!("-DXPLM_LEVEL={xplm_level}"));
+    r.push("-DXPLM_FORCE_ENUM_TYPE".to_owned());
 
     if cfg!(feature = "fmod") {
         r.push("-D_FMOD_STUB_".to_string());
