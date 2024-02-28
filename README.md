@@ -55,6 +55,8 @@ This crate includes the experimental ability to generate and link library stubs 
 Linux. This is desirable, so that plugins can be built without having to leave
 undefined symbols, a point at which other dependencies may be left dangling.
 
+The feature can be enabled with the feature flag `stub-linux`.
+
 This should work seamlessly on the upcoming X-Plane 12.1.0, however on previous
 versions, some changes will be necessary to make this work:
 
