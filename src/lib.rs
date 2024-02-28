@@ -8,14 +8,16 @@
 
 use std::fmt::Debug;
 
+use core::ffi::c_uint;
+
 use bitfield::{bitfield_bitrange, bitfield_debug, bitfield_fields};
 
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
-bitfield_bitrange! {struct XPLMDataTypeID(u32)}
+bitfield_bitrange! {struct XPLMDataTypeID(c_uint)}
 impl XPLMDataTypeID {
     bitfield_fields! {
-        u32;
+        c_uint;
         pub int, _ : 0;
         pub float, _ : 1;
         pub double, _ : 2;
@@ -39,10 +41,10 @@ impl Debug for XPLMDataTypeID {
     }
 }
 
-bitfield_bitrange! {struct XPLMKeyFlags(u32)}
+bitfield_bitrange! {struct XPLMKeyFlags(c_uint)}
 impl XPLMKeyFlags {
     bitfield_fields! {
-        u32;
+        c_uint;
         pub shift, _ : 0;
         pub option_alt, _ : 1;
         pub ctrl, _ : 2;
@@ -64,10 +66,10 @@ impl Debug for XPLMKeyFlags {
     }
 }
 
-bitfield_bitrange! {struct XPLMNavType(u32)}
+bitfield_bitrange! {struct XPLMNavType(c_uint)}
 impl XPLMNavType {
     bitfield_fields! {
-        u32;
+        c_uint;
         pub airport, _ : 0;
         pub ndb, _ : 1;
         pub vor, _ : 2;
