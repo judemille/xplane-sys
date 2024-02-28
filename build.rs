@@ -77,8 +77,9 @@ fn handle_platform(crate_path: &Path) {
             println!("cargo:rustc-link-lib=framework=XPWidgets");
         }
         "x86_64-unknown-linux-gnu" => {
-            #[cfg(feature = "stub-linux")]
-            {
+            // so that we don't try to resolve cmake on other OSes
+            #[cfg(target_os = "linux")]
+            if cfg!(feature = "stub-linux") {
                 println!("cargo:rustc-link-arg=--no-allow-shlib-undefined");
                 let dst = cmake::Config::new("sdk")
                     .build_target("all")
