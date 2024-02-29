@@ -4,7 +4,7 @@
 
 [package]
 name = "xplane-sys"
-version = "4.0.107"
+version = "4.0.108"
 authors = ["Julia DeMille <me@jdemille.com>"]
 description = "Low-level bindings for the X-Plane plugin SDK"
 repository = "https://git.sr.ht/~jdemille/xplane-sys"
