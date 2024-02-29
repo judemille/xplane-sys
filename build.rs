@@ -86,11 +86,11 @@ fn handle_platform(crate_path: &Path) {
                     .build();
                 println!(
                     "cargo:rustc-link-search={}",
-                    dst.join("xplm/src").to_str().unwrap()
+                    dst.join("build/xplm/src").to_str().unwrap()
                 );
                 println!(
                     "cargo:rustc-link-search={}",
-                    dst.join("xpwidgets/src").to_str().unwrap()
+                    dst.join("build/xpwidgets/src").to_str().unwrap()
                 );
                 println!("cargo:rustc-link-lib=dylib:+verbatim=XPLM_64.so");
                 println!("cargo:rustc-link-lib=dylib:+verbatim=XPWidgets_64.so");
